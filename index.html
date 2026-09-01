@@ -1,0 +1,776 @@
+  <!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>workCRM</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="login-page" class="login-page">
+      <div class="auth-wrap">
+        <div class="auth-logo">
+          <img src="./assets/logo-export.png" width="70" height="84" alt="Герб" />
+        </div>
+        <form class="login-dialog" id="login-form">
+          <h1 class="login-title">Авторизация</h1>
+          <div class="login-fields">
+            <label class="login-field">
+              <input type="text" name="login" placeholder="Логин" autocomplete="username" />
+            </label>
+            <label class="login-field">
+              <input type="password" name="password" placeholder="Пароль" autocomplete="current-password" />
+            </label>
+          </div>
+          <p class="login-error hidden" id="login-error">Введите логин и пароль</p>
+          <button class="btn-login" type="submit">Войти</button>
+        </form>
+      </div>
+    </main>
+
+    <div id="app-page" class="app-page hidden">
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+      <div class="app-shell">
+        <aside class="sidebar" id="sidebar">
+          <button class="profile-header" type="button" id="profile-btn" data-nav="settings">
+            <div class="avatar">A</div>
+            <div class="profile-text">
+              <div class="profile-name">Администратор</div>
+              <div class="profile-role">Администратор</div>
+            </div>
+            <span class="icon icon-12">
+              <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+            </span>
+          </button>
+
+          <nav class="nav-groups">
+            <div class="nav-group is-collapsed" data-group="protocols">
+              <button class="nav-group-header is-active" type="button" data-toggle-group="protocols" data-nav="protocols">
+                <span>Протоколы</span>
+                <span class="icon icon-10 nav-chevron">
+                  <img src="./assets/icons/chevron-up.svg" width="10" height="10" alt="" />
+                </span>
+              </button>
+              <div class="nav-subs">
+                <button class="nav-sub is-active" type="button" data-year-nav="2026" data-year-view="protocols">2026</button>
+                <button class="nav-sub" type="button" data-year-nav="2025" data-year-view="protocols">2025</button>
+                <button class="nav-sub" type="button" data-year-nav="2024" data-year-view="protocols">2024</button>
+              </div>
+            </div>
+
+            <div class="nav-group is-collapsed" data-group="reports">
+              <button class="nav-group-header" type="button" data-toggle-group="reports" data-nav="report">
+                <span>Отчёты</span>
+                <span class="icon icon-10 nav-chevron">
+                  <img src="./assets/icons/chevron-up.svg" width="10" height="10" alt="" />
+                </span>
+              </button>
+              <div class="nav-subs" id="report-subject-nav"></div>
+            </div>
+
+            <button class="nav-group-header" type="button" data-nav="stats">
+              <span>Статистика</span>
+            </button>
+
+            <div class="nav-group is-collapsed" data-group="schools">
+              <button class="nav-group-header" type="button" data-toggle-group="schools" data-nav="schools">
+                <span>Школы</span>
+                <span class="icon icon-10 nav-chevron">
+                  <img src="./assets/icons/chevron-up.svg" width="10" height="10" alt="" />
+                </span>
+              </button>
+              <div class="nav-subs">
+                <button class="nav-sub" type="button" data-school-nav="1">МБОУ СОШ № 1</button>
+                <button class="nav-sub" type="button" data-school-nav="2">МБОУ СОШ № 2</button>
+                <button class="nav-sub" type="button" data-school-nav="3">МБОУ СОШ № 3</button>
+                <button class="nav-sub" type="button" data-school-nav="4">МБОУ СОШ № 4</button>
+                <button class="nav-sub" type="button" data-school-nav="5">МБОУ СОШ № 5</button>
+                <button class="nav-sub" type="button" data-school-nav="6">МБОУ СОШ № 6</button>
+                <button class="nav-sub" type="button" data-school-nav="7">МБОУ СОШ № 7</button>
+                <button class="nav-sub" type="button" data-school-nav="8">МБОУ СОШ № 8</button>
+                <button class="nav-sub" type="button" data-school-nav="9">МБОУ СОШ № 9</button>
+                <button class="nav-sub" type="button" data-school-nav="10">МБОУ СОШ № 10</button>
+                <button class="nav-sub" type="button" data-school-nav="gym1">Гимназия № 1</button>
+              </div>
+            </div>
+
+            <button class="nav-group-header" type="button" data-nav="forms">
+              <span>Общие формы</span>
+            </button>
+
+            <button class="nav-group-header" type="button" data-nav="settings">
+              <span>Настройки</span>
+            </button>
+
+            <button class="nav-group-header" type="button" id="logout-btn">
+              <span>Выход</span>
+            </button>
+          </nav>
+        </aside>
+
+        <section class="main">
+          <div class="main-content" id="view-protocols">
+            <div class="header-row">
+              <div class="title-with-status">
+                <button class="menu-toggle" type="button" id="menu-toggle" aria-label="Меню">
+                  <span></span>
+                </button>
+                <div class="title-stack">
+                  <h1 class="page-title" id="protocols-page-title">Протоколы</h1>
+                  <p class="page-subtitle" id="protocols-page-subtitle">Все школы · все годы</p>
+                </div>
+              </div>
+              <label class="search-container">
+                <span class="icon icon-14">
+                  <img src="./assets/icons/search.svg" width="14" height="14" alt="" />
+                </span>
+                <input type="search" id="protocol-search" placeholder="Школа, предмет или ученик" />
+              </label>
+            </div>
+
+            <div class="tabs-row">
+              <div class="tabs-left" id="year-tabs"></div>
+              <div class="tabs-actions">
+                <button class="btn-primary" type="button" id="upload-files-btn">Загрузить файлы</button>
+                <input type="file" id="report-file" hidden accept=".xlsx,.xls,.xlsm,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <button class="link-action" type="button" id="create-report">
+                  <span class="icon icon-14">
+                    <img src="./assets/icons/plus.svg" width="14" height="14" alt="" />
+                  </span>
+                  Создать отчёт
+                </button>
+              </div>
+            </div>
+
+            <div class="actions-row">
+              <div class="filters-left">
+                <div class="dropdown" data-dropdown="grade">
+                  <button class="select" type="button" id="grade-trigger">
+                    <span id="grade-label">11 Класс</span>
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                  <ul class="dropdown-menu" role="listbox" aria-label="Класс">
+                    <li role="option" data-value="all">Все классы</li>
+                    <li role="option" data-value="9">9 Класс</li>
+                    <li role="option" data-value="11" aria-selected="true">11 Класс</li>
+                  </ul>
+                </div>
+                <button class="select" type="button" id="open-search">
+                  Фильтры
+                  <span class="filter-badge hidden" id="filter-badge">0</span>
+                  <span class="icon icon-12">
+                    <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                  </span>
+                </button>
+                <button class="link-action is-medium" type="button" id="clear-filters">Очистить</button>
+              </div>
+              <div class="pagination">
+                <span class="page-count" id="page-count">0 записей</span>
+                <div class="arrows">
+                  <button class="pager-btn" type="button" id="page-prev" aria-label="Назад">
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-left.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                  <button class="pager-btn" type="button" id="page-next" aria-label="Вперёд">
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-right.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                </div>
+                <span class="select is-static" id="page-label">1 стр</span>
+              </div>
+            </div>
+
+            <div class="protocol-block" id="protocol-block">
+              <div class="report-preview-bar">
+                <div class="report-preview-label">Список протоколов</div>
+                <button class="select" type="button" id="protocols-toggle-btn" aria-expanded="true" aria-controls="protocol-block-body">
+                  <span id="protocols-toggle-label">Скрыть</span>
+                  <span class="icon icon-12 preview-toggle-chevron">
+                    <img src="./assets/icons/chevron-up.svg" width="12" height="12" alt="" />
+                  </span>
+                </button>
+              </div>
+              <div class="protocol-block-body" id="protocol-block-body">
+              <div class="protocol-headers" id="protocol-headers"></div>
+              <div class="protocol-table-toolbar">
+                <button class="link-action" type="button" id="protocol-add-col">
+                  <span class="icon icon-14">
+                    <img src="./assets/icons/plus.svg" width="14" height="14" alt="" />
+                  </span>
+                  Добавить столбец
+                </button>
+                <span class="protocol-table-hint">Двойной клик по названию столбца или ячейке — изменить текст</span>
+              </div>
+              <div class="table-scroll" id="protocols-table-wrap">
+              <div class="protocols-table" id="protocols-table">
+                <div class="protocols-head" id="protocols-head"></div>
+                <div id="protocols-body"></div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="main-content hidden" id="view-report">
+            <div class="header-row">
+              <div class="title-with-status">
+                <button class="menu-toggle" type="button" data-open-menu aria-label="Меню">
+                  <span></span>
+                </button>
+                <button class="back-btn" type="button" id="back-to-protocols">←</button>
+                <h1 class="page-title" id="reports-page-title">Отчёты</h1>
+              </div>
+            </div>
+
+            <div class="tabs-row">
+              <div class="tabs-left is-wrap" id="report-subject-tabs"></div>
+            </div>
+
+            <section class="uploaded-list-section is-collapsed">
+              <div class="report-preview-bar">
+                <h2 class="section-title">Новый отчёт</h2>
+                <button class="select" type="button" data-collapse-section aria-expanded="false">
+                  <span data-collapse-label>Показать</span>
+                  <span class="icon icon-12 preview-toggle-chevron">
+                    <img src="./assets/icons/chevron-up.svg" width="12" height="12" alt="" />
+                  </span>
+                </button>
+              </div>
+              <div class="section-collapse-body">
+              <div class="form-row">
+                <label class="input-group input-group-name">
+                  <span class="input-label">Название</span>
+                  <div class="dropdown title-listbox" data-dropdown="report-title">
+                    <button class="field title-listbox-trigger" type="button" id="report-title-trigger">
+                      <span id="report-title-label">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Русский язык”</span>
+                      <span class="icon icon-12">
+                        <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                      </span>
+                    </button>
+                    <ul class="dropdown-menu title-listbox-menu" role="listbox" aria-label="Название">
+                      <li role="option" aria-selected="true">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Русский язык”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Базовая математика”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Профильная математика”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Обществознание”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Физика”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Химия и Биология”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “История”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Литература”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “География”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Информатика”</li>
+                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Иностранные языки”</li>
+                    </ul>
+                  </div>
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Формат документа</span>
+                  <span class="field">
+                    <select id="report-format">
+                      <option value="" selected disabled>Выбор</option>
+                      <option>WORD</option>
+                      <option>EXCEL</option>
+                      <option>PDF</option>
+                    </select>
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </span>
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Дата</span>
+                  <span class="field">
+                    <input type="date" id="report-date" value="2026-07-11" />
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/calendar.svg" width="12" height="12" alt="" />
+                    </span>
+                  </span>
+                </label>
+                <div class="input-group">
+                  <span class="input-label">Файл</span>
+                  <button class="btn-primary" type="button" id="save-document-btn">Сохранить документ</button>
+                </div>
+              </div>
+              <div class="report-preview is-collapsed" id="report-preview">
+                <div class="report-preview-bar">
+                  <div class="report-preview-label">Предпросмотр отчёта</div>
+                  <button class="select" type="button" id="preview-toggle-btn" aria-expanded="false" aria-controls="report-preview-stage">
+                    <span id="preview-toggle-label">Показать</span>
+                    <span class="icon icon-12 preview-toggle-chevron">
+                      <img src="./assets/icons/chevron-up.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                </div>
+                <div class="report-preview-stage" id="report-preview-stage">
+                  <article class="report-preview-sheet" id="report-preview-sheet"></article>
+                </div>
+              </div>
+              </div>
+            </section>
+
+            <section class="uploaded-list-section is-collapsed">
+              <div class="report-preview-bar">
+                <h2 class="section-title">Документы</h2>
+                <button class="select" type="button" data-collapse-section aria-expanded="false">
+                  <span data-collapse-label>Показать</span>
+                  <span class="icon icon-12 preview-toggle-chevron">
+                    <img src="./assets/icons/chevron-up.svg" width="12" height="12" alt="" />
+                  </span>
+                </button>
+              </div>
+              <div class="section-collapse-body">
+              <div class="list-actions">
+                <div class="filters-row">
+                  <button class="select" type="button">
+                    Тип документа
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                  <button class="select" type="button">
+                    Период с
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                  <button class="select" type="button">
+                    Период до
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                  <button class="select" type="button">
+                    Еще
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                </div>
+                <div class="pagination">
+                  <span class="page-count">1-3/3</span>
+                  <div class="arrows">
+                    <button class="pager-btn" type="button" aria-label="Назад">
+                      <span class="icon icon-12">
+                        <img src="./assets/icons/chevron-left.svg" width="12" height="12" alt="" />
+                      </span>
+                    </button>
+                    <button class="pager-btn" type="button" aria-label="Вперёд">
+                      <span class="icon icon-12">
+                        <img src="./assets/icons/chevron-right.svg" width="12" height="12" alt="" />
+                      </span>
+                    </button>
+                  </div>
+                  <button class="select" type="button">
+                    3 стр
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                  <button class="select" type="button">
+                    Выгруженные
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-scroll">
+                <div class="docs-table">
+                  <div class="docs-head">
+                    <div class="th docs-col-name">Название документа</div>
+                    <div class="th docs-col-type">Тип</div>
+                    <div class="th docs-col-date">Дата</div>
+                    <div class="docs-col-actions"></div>
+                  </div>
+                  <div id="docs-body"></div>
+                </div>
+              </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="main-content hidden" id="view-stats">
+            <div class="header-row">
+              <div class="title-with-status">
+                <button class="menu-toggle" type="button" data-open-menu aria-label="Меню">
+                  <span></span>
+                </button>
+                <h1 class="page-title">Статистика</h1>
+              </div>
+            </div>
+            <p class="page-subtitle">Считается по таблицам школ. Выберите год, школу и порог балла.</p>
+            <div class="stats-toolbar">
+              <label class="input-group">
+                <span class="input-label">Год</span>
+                <span class="field">
+                  <select id="stats-year">
+                    <option value="all">Все годы</option>
+                    <option value="2026" selected>2026</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                  </select>
+                  <span class="icon icon-12">
+                    <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                  </span>
+                </span>
+              </label>
+              <label class="input-group">
+                <span class="input-label">Школа</span>
+                <span class="field">
+                  <select id="stats-school"></select>
+                  <span class="icon icon-12">
+                    <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                  </span>
+                </span>
+              </label>
+              <label class="input-group">
+                <span class="input-label">Балл выше</span>
+                <span class="field">
+                  <input type="number" id="stats-threshold" min="0" max="100" value="59" />
+                </span>
+              </label>
+            </div>
+            <div class="stats-grid" id="stats-cards"></div>
+            <div class="stats-panels">
+              <section class="stats-panel">
+                <h2 class="section-title">Средний балл по школам</h2>
+                <div class="table-scroll">
+                  <table class="data-table" id="stats-schools-table">
+                    <thead>
+                      <tr>
+                        <th>Школа</th>
+                        <th>Участников</th>
+                        <th>Средний балл</th>
+                        <th>Сдали</th>
+                        <th>Не сдали</th>
+                      </tr>
+                    </thead>
+                    <tbody id="stats-schools-body"></tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="stats-panel">
+                <h2 class="section-title">Ученики выше порога</h2>
+                <div class="table-scroll">
+                  <table class="data-table" id="stats-students-table">
+                    <thead>
+                      <tr>
+                        <th>Ученик</th>
+                        <th>Школа</th>
+                        <th>Класс</th>
+                        <th>Балл</th>
+                      </tr>
+                    </thead>
+                    <tbody id="stats-students-body"></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="main-content hidden" id="view-schools">
+            <div class="header-row">
+              <div class="title-with-status">
+                <button class="menu-toggle" type="button" data-open-menu aria-label="Меню">
+                  <span></span>
+                </button>
+                <h1 class="page-title" id="schools-page-title">Школы</h1>
+              </div>
+            </div>
+            <p class="page-subtitle">Выберите школу, чтобы открыть её протоколы</p>
+            <div class="school-select-bar">
+              <div class="dropdown" data-dropdown="school">
+                <button class="select school-select-trigger" type="button" id="school-trigger">
+                  <span id="school-label">МБОУ СОШ № 1</span>
+                  <span class="icon icon-12">
+                    <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                  </span>
+                </button>
+                <ul class="dropdown-menu" id="school-select-menu" role="listbox" aria-label="Школа"></ul>
+              </div>
+            </div>
+            <div class="tabs-row">
+              <div class="tabs-left" id="school-year-tabs"></div>
+            </div>
+            <section class="school-protocols-section">
+              <h2 class="section-title">Протоколы школы</h2>
+              <div class="protocol-headers" id="school-protocol-headers"></div>
+            </section>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Код ОО</th>
+                    <th>Код МСУ</th>
+                    <th>Название</th>
+                    <th>Населённый пункт</th>
+                    <th>Статус</th>
+                  </tr>
+                </thead>
+                <tbody id="schools-body">
+                  <tr data-school="1"><td>22101</td><td>220</td><td>МБОУ СОШ № 1</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="2"><td>22102</td><td>220</td><td>МБОУ СОШ № 2</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="3"><td>22103</td><td>220</td><td>МБОУ СОШ № 3</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="4"><td>22104</td><td>220</td><td>МБОУ СОШ № 4</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="5"><td>22105</td><td>220</td><td>МБОУ СОШ № 5</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="6"><td>22106</td><td>220</td><td>МБОУ СОШ № 6</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="7"><td>22107</td><td>220</td><td>МБОУ СОШ № 7</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="8"><td>22108</td><td>220</td><td>МБОУ СОШ № 8</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="9"><td>22109</td><td>220</td><td>МБОУ СОШ № 9</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="10"><td>22110</td><td>220</td><td>МБОУ СОШ № 10</td><td>Кемерово</td><td>Активна</td></tr>
+                  <tr data-school="gym1"><td>22111</td><td>220</td><td>Гимназия № 1</td><td>Кемерово</td><td>Активна</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="main-content hidden" id="view-forms">
+            <div class="header-row">
+              <div class="title-with-status">
+                <button class="menu-toggle" type="button" data-open-menu aria-label="Меню">
+                  <span></span>
+                </button>
+                <h1 class="page-title">Общие формы</h1>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Название</th>
+                    <th>Тип</th>
+                    <th>Назначение</th>
+                    <th>Дата обновления</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Протокол проверки результатов ГИА</td>
+                    <td>WORD</td>
+                    <td>ЕГЭ / ОГЭ</td>
+                    <td>11.07.2026</td>
+                  </tr>
+                  <tr>
+                    <td>Ведомость участников экзамена</td>
+                    <td>EXCEL</td>
+                    <td>ППЭ</td>
+                    <td>03.06.2026</td>
+                  </tr>
+                  <tr>
+                    <td>Акт готовности пункта проведения</td>
+                    <td>PDF</td>
+                    <td>ППЭ</td>
+                    <td>20.05.2026</td>
+                  </tr>
+                  <tr>
+                    <td>Бланк апелляции о несогласии с выставленными баллами</td>
+                    <td>PDF</td>
+                    <td>Конфликтная комиссия</td>
+                    <td>14.05.2026</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="main-content hidden" id="view-settings">
+            <div class="header-row">
+              <div class="title-with-status">
+                <button class="menu-toggle" type="button" data-open-menu aria-label="Меню">
+                  <span></span>
+                </button>
+                <h1 class="page-title">Настройки</h1>
+              </div>
+            </div>
+            <section class="uploaded-list-section">
+              <h2 class="section-title">Профиль</h2>
+              <div class="form-row">
+                <label class="input-group">
+                  <span class="input-label">Имя</span>
+                  <span class="field"><input type="text" id="settings-name" value="Администратор" /></span>
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Роль</span>
+                  <span class="field">
+                    <select>
+                      <option selected>Администратор</option>
+                      <option>Оператор</option>
+                      <option>Председатель комиссии</option>
+                    </select>
+                    <span class="icon icon-12">
+                      <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-row">
+                <label class="input-group">
+                  <span class="input-label">Логин</span>
+                  <span class="field"><input type="text" value="admin" /></span>
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Пароль</span>
+                  <span class="field"><input type="password" value="********" /></span>
+                </label>
+              </div>
+              <button class="btn-primary" type="button" id="settings-save">Сохранить</button>
+            </section>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="search-modal" class="modal-overlay hidden">
+      <div class="search-modal" role="dialog" aria-labelledby="search-title">
+        <h2 class="search-modal-title" id="search-title">Фильтры</h2>
+        <div class="search-grid">
+          <label class="search-field">
+            <span class="input-label">Школа (код МСУ)</span>
+            <span class="field">
+              <select id="filter-msu">
+                <option value="all" selected>Все</option>
+              </select>
+              <span class="icon icon-12">
+                <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+              </span>
+            </span>
+          </label>
+          <label class="search-field">
+            <span class="input-label">Аудитория</span>
+            <span class="field">
+              <select id="filter-room">
+                <option value="all" selected>Все</option>
+              </select>
+              <span class="icon icon-12">
+                <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+              </span>
+            </span>
+          </label>
+          <label class="search-field">
+            <span class="input-label">Оценка</span>
+            <span class="field">
+              <select id="filter-mark">
+                <option value="all" selected>Все</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+              </select>
+              <span class="icon icon-12">
+                <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+              </span>
+            </span>
+          </label>
+          <label class="search-field">
+            <span class="input-label">Предмет</span>
+            <span class="field">
+              <select id="filter-subject">
+                <option value="all" selected>Все</option>
+              </select>
+              <span class="icon icon-12">
+                <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+              </span>
+            </span>
+          </label>
+          <label class="search-field">
+            <span class="input-label">Код ОО</span>
+            <span class="field">
+              <select id="filter-oo">
+                <option value="all" selected>Все</option>
+              </select>
+              <span class="icon icon-12">
+                <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+              </span>
+            </span>
+          </label>
+          <span></span>
+          <label class="search-field">
+            <span class="input-label">Баллы</span>
+            <div class="score-filter">
+              <span class="field">
+                <select id="filter-score-op">
+                  <option value="all" selected>Все</option>
+                  <option value="gt">Более</option>
+                  <option value="lt">Менее</option>
+                </select>
+                <span class="icon icon-12">
+                  <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                </span>
+              </span>
+              <span class="field">
+                <input type="number" id="filter-score-value" min="0" max="100" step="1" placeholder="Число" disabled />
+              </span>
+            </div>
+          </label>
+          <label class="search-field">
+            <span class="input-label">Класс в таблице</span>
+            <span class="field">
+              <select id="filter-klass-extra">
+                <option value="all" selected>Все</option>
+                <option value="9">9</option>
+                <option value="11">11</option>
+              </select>
+              <span class="icon icon-12">
+                <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="search-actions">
+          <button class="btn-primary" type="button" id="search-save">Применить</button>
+          <button class="btn-danger" type="button" id="search-cancel">Отменить</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="import-modal" class="modal-overlay hidden">
+      <div class="import-modal" role="dialog" aria-labelledby="import-modal-title">
+        <div class="import-modal-head">
+          <h2 class="search-modal-title" id="import-modal-title">Просмотр таблицы</h2>
+          <div class="import-fields">
+            <label class="import-title-field">
+              <span class="input-label">Название</span>
+              <input type="text" id="import-title-input" />
+            </label>
+            <div class="import-title-field">
+              <span class="input-label">Школа</span>
+              <div class="dropdown" data-dropdown="import-school">
+                <button class="select school-select-trigger" type="button" id="import-school-trigger">
+                  <span id="import-school-label">МБОУ СОШ № 1</span>
+                  <span class="icon icon-12">
+                    <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                  </span>
+                </button>
+                <ul class="dropdown-menu" id="import-school-menu" role="listbox" aria-label="Школа"></ul>
+              </div>
+            </div>
+          </div>
+          <p class="import-modal-file" id="import-modal-file"></p>
+        </div>
+        <div class="import-table-toolbar">
+          <button class="link-action" type="button" id="import-add-col">
+            <span class="icon icon-14">
+              <img src="./assets/icons/plus.svg" width="14" height="14" alt="" />
+            </span>
+            Добавить столбец
+          </button>
+          <span class="import-table-hint">Двойной клик по названию столбца или ячейке — изменить текст</span>
+        </div>
+        <div class="import-table-scroll" id="import-table-wrap"></div>
+        <div class="search-actions import-modal-actions">
+          <button class="btn-primary" type="button" id="import-save">Сохранить</button>
+          <button class="btn-danger" type="button" id="import-cancel">Отменить</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-root" id="toast-root" aria-live="polite"></div>
+
+    <script src="./assets/vendor/xlsx.full.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
