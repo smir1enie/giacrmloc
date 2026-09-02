@@ -1,45 +1,5 @@
 const YEARS = ["2026", "2025", "2024"];
 
-const STUDENTS = [
-  { id: 1, msu: "220", oo: "22108", klass: "11Д", ppe: "225", room: "7", last: "Абатуров", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 2, msu: "220", oo: "22108", klass: "11В", ppe: "225", room: "2", last: "Горчакова", first: "Марина", middle: "Сергеевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 3, msu: "220", oo: "22108", klass: "11Д", ppe: "225", room: "6", last: "Раджабов", first: "Михаил", middle: "Васильевич", series: "5222", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: true },
-  { id: 4, msu: "220", oo: "22108", klass: "9А", ppe: "225", room: "1", last: "Воронко", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 5, msu: "220", oo: "22108", klass: "11Д", ppe: "225", room: "5", last: "Быкова", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 6, msu: "220", oo: "22108", klass: "9Б", ppe: "225", room: "5", last: "Минхаиров", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: true },
-  { id: 7, msu: "220", oo: "22108", klass: "11Б", ppe: "225", room: "2", last: "Абатуров", first: "Михаил", middle: "Васильевич", series: "0124", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 8, msu: "220", oo: "22108", klass: "9К", ppe: "225", room: "7", last: "Неъматов", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: true },
-  { id: 9, msu: "220", oo: "22108", klass: "11Д", ppe: "225", room: "7", last: "Морев", first: "Михаил", middle: "Васильевич", series: "6723", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 10, msu: "220", oo: "22108", klass: "9Д", ppe: "225", room: "1", last: "Сухенко", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 11, msu: "220", oo: "22108", klass: "11Д", ppe: "225", room: "3", last: "Кузнецов", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 12, msu: "220", oo: "22108", klass: "11А", ppe: "225", room: "4", last: "Таробрин", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 13, msu: "220", oo: "22108", klass: "9В", ppe: "225", room: "2", last: "Спирка", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-  { id: 14, msu: "220", oo: "22108", klass: "11И", ppe: "225", room: "1", last: "Дроменко", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: true },
-  { id: 15, msu: "220", oo: "22108", klass: "9Г", ppe: "225", room: "7", last: "Ибраев", first: "Михаил", middle: "Васильевич", series: "6722", number: "116991", short: "++++++++++++", long: "2(2)1(3)0(2)2(2)0(3)4(4)1(4)", score: "28", grade: "3", tall: false },
-];
-
-const DOCUMENTS = [
-  {
-    name: "Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования в 2026 г. “Русский язык”",
-    type: "WORD",
-    date: "11.07.2026",
-  },
-  {
-    name: "Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования в 2026 г. “Математика”",
-    type: "EXCEL",
-    date: "11.07.2026",
-  },
-  {
-    name: "Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования в 2026 г. “Литература”",
-    type: "PDF",
-    date: "11.07.2026",
-  },
-];
-
-function cloneDocuments() {
-  return DOCUMENTS.map((doc) => ({ name: doc.name, type: doc.type, date: doc.date }));
-}
-
 const moreIcon = `
   <button class="more-actions" type="button" aria-label="Действия">
     <span class="icon icon-16">
@@ -48,67 +8,75 @@ const moreIcon = `
   </button>
 `;
 
-const SUBJECTS = [
-  "Русский язык",
-  "Базовая математика",
-  "Профильная математика",
-  "Обществознание",
-  "Физика",
-  "Химия и Биология",
-  "История",
-  "Литература",
-  "География",
-  "Информатика",
-  "Иностранные языки",
-];
+const SUBJECTS = [];
+const SCHOOLS = [];
+const schoolDocuments = {};
 
-const SCHOOLS = [
-  { id: "1", name: "МБОУ СОШ № 1", oo: "22101", msu: "220", city: "Кемерово" },
-  { id: "2", name: "МБОУ СОШ № 2", oo: "22102", msu: "220", city: "Кемерово" },
-  { id: "3", name: "МБОУ СОШ № 3", oo: "22103", msu: "220", city: "Кемерово" },
-  { id: "4", name: "МБОУ СОШ № 4", oo: "22104", msu: "220", city: "Кемерово" },
-  { id: "5", name: "МБОУ СОШ № 5", oo: "22105", msu: "220", city: "Кемерово" },
-  { id: "6", name: "МБОУ СОШ № 6", oo: "22106", msu: "220", city: "Кемерово" },
-  { id: "7", name: "МБОУ СОШ № 7", oo: "22107", msu: "220", city: "Кемерово" },
-  { id: "8", name: "МБОУ СОШ № 8", oo: "22108", msu: "220", city: "Кемерово" },
-  { id: "9", name: "МБОУ СОШ № 9", oo: "22109", msu: "220", city: "Кемерово" },
-  { id: "10", name: "МБОУ СОШ № 10", oo: "22110", msu: "220", city: "Кемерово" },
-  { id: "gym1", name: "Гимназия № 1", oo: "22111", msu: "220", city: "Кемерово" },
-];
-
-const schoolDocuments = Object.fromEntries(SCHOOLS.map((school) => [school.id, cloneDocuments()]));
+function formatDocDate(value) {
+  const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!match) return value || todayLabel();
+  return `${match[3]}.${match[2]}.${match[1]}`;
+}
 
 function currentDocuments() {
   if (!schoolDocuments[state.school]) schoolDocuments[state.school] = [];
   return schoolDocuments[state.school];
 }
 
-const PROTOCOL_TITLES = SUBJECTS.map(
-  (subject) =>
-    `Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “${subject}”`
-);
+function protocolTitleForSubject(subject) {
+  return `Протокол проверки результатов государственной итоговой аттестации “${subject}”`;
+}
 
 const PROTOCOL_TITLES_BY_YEAR = {
-  "2026": PROTOCOL_TITLES,
-  "2025": PROTOCOL_TITLES.slice(0, 7),
-  "2024": PROTOCOL_TITLES.slice(0, 4),
+  "2026": [],
+  "2025": [],
+  "2024": [],
 };
 
 function copyTitlesByYear() {
   return {
-    "2026": PROTOCOL_TITLES.slice(),
-    "2025": PROTOCOL_TITLES.slice(0, 7),
-    "2024": PROTOCOL_TITLES.slice(0, 4),
+    "2026": [],
+    "2025": [],
+    "2024": [],
   };
 }
 
-const PROTOCOL_TITLES_BY_SCHOOL = Object.fromEntries(
-  SCHOOLS.map((school) => [school.id, copyTitlesByYear()])
-);
+const PROTOCOL_TITLES_BY_SCHOOL = {};
 
 function currentProtocolTitles() {
   const byYear = PROTOCOL_TITLES_BY_SCHOOL[state.school] || PROTOCOL_TITLES_BY_YEAR;
-  return byYear[state.year] || PROTOCOL_TITLES;
+  return byYear[state.year] || [];
+}
+
+const API_BASE = "";
+let apiReady = false;
+let protocolCatalog = [];
+let importFileBase64 = "";
+
+async function apiGet(path) {
+  const response = await fetch(`${API_BASE}${path}`);
+  if (!response.ok) throw new Error((await response.json().catch(() => ({}))).error || response.statusText);
+  return response.json();
+}
+
+async function apiSend(path, method, body) {
+  const response = await fetch(`${API_BASE}${path}`, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || response.statusText);
+  return data;
+}
+
+async function refreshCatalog() {
+  if (!apiReady) return;
+  const params = new URLSearchParams();
+  if (state.scope === "year" || state.scope === "school") params.set("year", state.year);
+  if (state.scope === "school") params.set("school", state.school);
+  if (state.search.trim()) params.set("q", state.search.trim());
+  protocolCatalog = await apiGet(`/api/protocols?${params.toString()}`);
 }
 
 function protocolSubject(title) {
@@ -129,6 +97,26 @@ function tableMatchesQuery(table, query) {
 }
 
 function listedProtocols() {
+  if (apiReady) {
+    return protocolCatalog
+      .filter((item) => {
+        if (state.scope === "school" && item.school_id !== state.school) return false;
+        if (state.scope === "year" && String(item.year) !== String(state.year)) return false;
+        if (state.filters.subject !== "all" && item.subject !== state.filters.subject) return false;
+        return true;
+      })
+      .map((item, listedIndex) => ({
+        listedIndex,
+        protocolId: item.id,
+        schoolId: item.school_id,
+        schoolName: item.school_name,
+        year: String(item.year),
+        index: listedIndex,
+        title: item.title,
+        subject: item.subject,
+        studentCount: item.student_count,
+      }));
+  }
   const schools = state.scope === "school" ? SCHOOLS.filter((school) => school.id === state.school) : SCHOOLS;
   const years = state.scope === "all" ? YEARS : [state.year];
   const query = state.search.trim().toLowerCase();
@@ -227,16 +215,21 @@ function fillSelect(id, values, selected) {
 function populateFilterOptions() {
   fillSelect("filter-msu", [...new Set(SCHOOLS.map((item) => item.msu))], state.filters.msu);
   fillSelect("filter-oo", [...new Set(SCHOOLS.map((item) => item.oo))], state.filters.oo);
-  fillSelect("filter-subject", SUBJECTS, state.filters.subject);
+  fillSelect(
+    "filter-subject",
+    [...new Set([...(apiReady ? protocolCatalog.map((item) => item.subject) : []), ...SUBJECTS].filter(Boolean))],
+    state.filters.subject
+  );
   const roomIndex = columnIndexBy(/аудитор/i);
   const rooms = roomIndex < 0 ? [] : [...new Set(tableData.rows.map((row) => String(row.cells[roomIndex] || "")).filter(Boolean))];
   fillSelect("filter-room", rooms, state.filters.room);
   const statsSchool = document.getElementById("stats-school");
-  if (statsSchool && !statsSchool.dataset.ready) {
+  if (statsSchool) {
+    const current = statsSchool.value || "all";
     statsSchool.innerHTML = [`<option value="all">Все школы</option>`]
       .concat(SCHOOLS.map((item) => `<option value="${item.id}">${escapeHtml(item.name)}</option>`))
       .join("");
-    statsSchool.dataset.ready = "1";
+    statsSchool.value = [...statsSchool.options].some((opt) => opt.value === current) ? current : "all";
   }
 }
 
@@ -252,8 +245,14 @@ function resetFilters() {
   });
   fillScoreFilterUi();
   updateFilterBadge();
-  renderProtocolHeaders();
-  renderStudents();
+  if (apiReady) refreshCatalog().then(() => {
+    renderProtocolHeaders();
+    renderStudents();
+  });
+  else {
+    renderProtocolHeaders();
+    renderStudents();
+  }
 }
 
 function applyFiltersFromModal() {
@@ -282,12 +281,13 @@ const state = {
   year: "2026",
   view: "protocols",
   grade: "11",
-  subject: "Русский язык",
+  subject: "",
   protocolIndex: 0,
   listedIndex: null,
   school: "1",
   scope: "all",
   search: "",
+  protocolId: null,
   page: 1,
   pageSize: 12,
   filters: {
@@ -305,7 +305,8 @@ const openSchoolGroups = new Set();
 
 function renderYearTabs(containerId, includeAll) {
   const withAll = includeAll && containerId === "year-tabs";
-  const years = withAll ? ["all", ...YEARS] : includeAll ? YEARS : ["2026", "2025"];
+  const yearList = [...new Set([...YEARS, ...protocolCatalog.map((item) => String(item.year))])].sort().reverse();
+  const years = withAll ? ["all", ...yearList] : includeAll ? yearList : ["2026", "2025"];
   const root = document.getElementById(containerId);
   if (!root) return;
   const activeYear = containerId === "year-tabs" && state.scope === "all" ? "all" : state.year;
@@ -329,6 +330,13 @@ function escapeHtml(value) {
 }
 
 function schoolReportSubjects() {
+  if (apiReady) {
+    const labels = protocolCatalog
+      .filter((item) => state.scope !== "school" || item.school_id === state.school)
+      .map((item) => item.subject)
+      .filter(Boolean);
+    return [...new Set(labels.length ? labels : SUBJECTS)];
+  }
   const titles = currentProtocolTitles();
   const labels = titles.map((title) => {
     const match = title.match(/[“"«]([^”"»]+)[”"»]/);
@@ -363,6 +371,27 @@ function renderReportSubjectNav() {
     `
     )
     .join("");
+  renderReportTitleOptions();
+}
+
+function renderReportTitleOptions() {
+  const menu = document.querySelector('[data-dropdown="report-title"] .dropdown-menu');
+  const label = document.getElementById("report-title-label");
+  if (!menu || !label) return;
+  const subjects = schoolReportSubjects();
+  if (!subjects.length) {
+    menu.innerHTML = "";
+    label.textContent = "Нет протоколов";
+    return;
+  }
+  if (!subjects.includes(state.subject)) state.subject = subjects[0];
+  menu.innerHTML = subjects
+    .map((subject) => {
+      const title = protocolTitleForSubject(subject);
+      return `<li role="option" aria-selected="${subject === state.subject}">${escapeHtml(title)}</li>`;
+    })
+    .join("");
+  label.textContent = protocolTitleForSubject(state.subject);
 }
 
 function setSubject(subject) {
@@ -418,26 +447,6 @@ const DEFAULT_ROTATED = new Set([
 const DEFAULT_GRID =
   "15px 26px 41px 24px 48px 26px 71px 51px 81px 32px 44px 119px 178px 29px 24px 24px";
 
-function studentToCells(row) {
-  return [
-    row.id,
-    row.msu,
-    row.oo,
-    row.klass,
-    row.ppe,
-    row.room,
-    row.last,
-    row.first,
-    row.middle,
-    row.series,
-    row.number,
-    row.short,
-    row.long,
-    row.score,
-    row.grade,
-  ].map((value) => String(value));
-}
-
 function cloneTableData(data) {
   return {
     columns: [...data.columns],
@@ -446,36 +455,24 @@ function cloneTableData(data) {
 }
 
 const tableData = {
-  columns: [...DEFAULT_COLUMNS],
-  rows: STUDENTS.map((row) => ({ id: row.id, cells: studentToCells(row) })),
-  imported: false,
+  columns: [],
+  rows: [],
+  imported: true,
 };
 
-const schoolTables = Object.fromEntries(
-  SCHOOLS.map((school, schoolIndex) => [
-    school.id,
-    {
-      columns: [...DEFAULT_COLUMNS],
-      rows: STUDENTS.map((row, rowIndex) => {
-        const score = Math.max(8, Math.min(98, Number(row.score) + schoolIndex * 4 + (rowIndex % 6) * 8 - 10));
-        const grade = score >= 70 ? "5" : score >= 50 ? "4" : score >= 32 ? "3" : "2";
-        return {
-          id: `${school.id}-${row.id}`,
-          cells: studentToCells({ ...row, score: String(score), grade }),
-        };
-      }),
-      imported: false,
-    },
-  ])
-);
+const schoolTables = {};
 
 function currentSchool() {
-  return SCHOOLS.find((school) => school.id === state.school) || SCHOOLS[0];
+  return SCHOOLS.find((school) => school.id === state.school) || SCHOOLS[0] || { id: "", name: "Школа", oo: "", msu: "", city: "", ppe: "" };
 }
 
 function bindSchoolTable() {
+  if (!schoolTables[state.school]) {
+    schoolTables[state.school] = apiReady
+      ? { columns: [], rows: [], imported: true }
+      : { columns: [...DEFAULT_COLUMNS], rows: [], imported: false };
+  }
   const stored = schoolTables[state.school];
-  if (!stored) return;
   tableData.columns = stored.columns;
   tableData.rows = stored.rows;
   tableData.imported = stored.imported;
@@ -489,29 +486,69 @@ function commitSchoolTable() {
   stored.imported = tableData.imported;
 }
 
+function renderSchoolNav() {
+  const root = document.querySelector('[data-group="schools"] .nav-subs');
+  if (!root) return;
+  const allActive = state.scope !== "school";
+  root.innerHTML = [
+    `<button class="nav-sub${allActive ? " is-active" : ""}" type="button" data-school-nav="all">Все школы</button>`,
+    ...SCHOOLS.map(
+      (school) =>
+        `<button class="nav-sub${state.scope === "school" && state.school === school.id ? " is-active" : ""}" type="button" data-school-nav="${school.id}">${escapeHtml(school.name)}</button>`
+    ),
+  ].join("");
+}
+
+function renderSchoolsTable() {
+  const body = document.getElementById("schools-body");
+  if (!body) return;
+  if (!SCHOOLS.length) {
+    body.innerHTML = `<tr><td colspan="5">Нет школ</td></tr>`;
+    return;
+  }
+  body.innerHTML = SCHOOLS.map((school) => {
+    const status = !school.status || school.status === "active" ? "Активна" : school.status;
+    const selected = state.scope === "school" && school.id === state.school;
+    return `<tr data-school="${school.id}"${selected ? " class=\"is-selected\"" : ""}>
+      <td>${escapeHtml(school.oo || "")}</td>
+      <td>${escapeHtml(school.ppe || "—")}</td>
+      <td>${escapeHtml(school.name)}</td>
+      <td>${escapeHtml(school.city || "")}</td>
+      <td>${escapeHtml(status)}</td>
+    </tr>`;
+  }).join("");
+}
+
 function renderSchoolSelect() {
   const menu = document.getElementById("school-select-menu");
   const label = document.getElementById("school-label");
   if (!menu || !label) return;
+  const allSelected = state.scope !== "school";
   const school = currentSchool();
-  label.textContent = school.name;
-  menu.innerHTML = SCHOOLS.map(
-    (item) => `
-      <li role="option" data-value="${item.id}" aria-selected="${item.id === state.school}">${escapeHtml(item.name)}</li>
+  label.textContent = allSelected ? "Все школы" : school.name;
+  menu.innerHTML = [`<li role="option" data-value="all" aria-selected="${allSelected}">Все школы</li>`]
+    .concat(
+      SCHOOLS.map(
+        (item) => `
+      <li role="option" data-value="${item.id}" aria-selected="${!allSelected && item.id === state.school}">${escapeHtml(item.name)}</li>
     `
-  ).join("");
+      )
+    )
+    .join("");
 }
 
 function renderSchoolProtocolMenu() {
   const root = document.getElementById("school-protocol-headers");
   if (!root) return;
-  const titles = currentProtocolTitles();
-  root.innerHTML = titles
+  const items = apiReady
+    ? protocolCatalog.filter((item) => state.scope !== "school" || item.school_id === state.school)
+    : currentProtocolTitles().map((title, index) => ({ title, index }));
+  root.innerHTML = items
     .map(
-      (title, index) => `
-      <div class="protocol-acc" data-school-protocol="${index}">
+      (item, index) => `
+      <div class="protocol-acc" data-school-protocol="${item.id || index}">
         <button class="protocol-acc-head" type="button">
-          <span class="protocol-acc-title">${escapeHtml(title)}</span>
+          <span class="protocol-acc-title">${escapeHtml(item.subject || item.title)}</span>
           <span class="icon icon-12 protocol-acc-chevron">
             <img src="./assets/icons/chevron-up.svg" width="12" height="12" alt="" />
           </span>
@@ -537,25 +574,47 @@ function updateSchoolUi() {
     else subtitle.textContent = `${school.name} · ${state.year}`;
   }
   const reportsTitle = document.getElementById("reports-page-title");
-  if (reportsTitle) reportsTitle.textContent = `Отчёты · ${school.name}`;
+  if (reportsTitle) {
+    reportsTitle.textContent = state.scope === "school" ? `Отчёты · ${school.name}` : "Отчёты · Все школы";
+  }
+  const schoolsTitle = document.getElementById("schools-page-title");
+  if (schoolsTitle) schoolsTitle.textContent = state.scope === "school" ? school.name : "Школы";
   document.querySelectorAll("[data-school-nav]").forEach((btn) => {
     btn.classList.toggle("is-active", state.scope === "school" && btn.dataset.schoolNav === state.school);
   });
   renderSchoolSelect();
-  document.querySelectorAll("#schools-body tr").forEach((row) => {
-    row.classList.toggle("is-selected", row.dataset.school === state.school);
-  });
+  renderSchoolNav();
+  renderSchoolsTable();
   document.querySelectorAll("[data-year-nav]").forEach((btn) => {
     btn.classList.toggle("is-active", state.scope !== "all" && btn.dataset.yearNav === state.year);
   });
 }
 
-function setSchool(id) {
+async function setSchool(id) {
   commitSchoolTable();
+  if (id === "all") {
+    state.scope = state.scope === "all" ? "all" : "year";
+    state.listedIndex = null;
+    state.protocolId = null;
+    if (apiReady) await refreshCatalog();
+    updateSchoolUi();
+    renderYearTabs("school-year-tabs", true);
+    renderSchoolProtocolMenu();
+    const subjects = schoolReportSubjects();
+    if (!subjects.includes(state.subject) && subjects.length) state.subject = subjects[0];
+    renderProtocolHeaders();
+    renderStudents();
+    renderDocuments();
+    renderSubjectTabs();
+    renderReportSubjectNav();
+    renderReportPreview();
+    return;
+  }
   state.school = id;
   state.scope = "school";
   state.listedIndex = null;
   bindSchoolTable();
+  if (apiReady) await refreshCatalog();
   updateSchoolUi();
   renderSchoolSelect();
   renderYearTabs("school-year-tabs", true);
@@ -588,7 +647,7 @@ function openSchoolProtocol(index) {
 
 const importDraft = {
   fileName: "",
-  schoolId: "1",
+  schoolId: "all",
   columns: [],
   rows: [],
 };
@@ -599,14 +658,18 @@ function klassColumnIndex(columns) {
 
 function visibleTableRows() {
   const klassIndex = klassColumnIndex(tableData.columns);
-  const scoreIndex = columnIndexBy(/балл/i);
+  const scoreIndex = (() => {
+    const test = columnIndexBy(/тестов/i);
+    return test >= 0 ? test : columnIndexBy(/балл/i);
+  })();
   const markIndex = columnIndexBy(/оценк/i);
   const roomIndex = columnIndexBy(/аудитор/i);
   const msuIndex = columnIndexBy(/мсу/i);
   const ooIndex = columnIndexBy(/код оо|^оо$/i);
   const query = state.search.trim().toLowerCase();
   return tableData.rows.filter((row) => {
-    if (!query && state.grade !== "all" && klassIndex >= 0 && !String(row.cells[klassIndex] || "").startsWith(state.grade)) return false;
+    const klass = String(row.cells[klassIndex] || "");
+    if (!query && state.grade !== "all" && klassIndex >= 0 && klass && !klass.startsWith(state.grade)) return false;
     if (state.filters.room !== "all" && roomIndex >= 0 && String(row.cells[roomIndex] || "") !== state.filters.room) return false;
     if (state.filters.msu !== "all" && msuIndex >= 0 && String(row.cells[msuIndex] || "") !== state.filters.msu) return false;
     if (state.filters.oo !== "all" && ooIndex >= 0 && String(row.cells[ooIndex] || "") !== state.filters.oo) return false;
@@ -831,7 +894,21 @@ function deleteProtocolColumn(index) {
   renderStudents();
 }
 
-function activateListedProtocol(listedIndex) {
+async function loadProtocolTable(protocolId) {
+  const data = await apiGet(`/api/protocols/${protocolId}`);
+  tableData.columns = data.columns || [];
+  tableData.rows = (data.students || []).map((row) => ({ id: row.id, cells: row.cells || [] }));
+  tableData.imported = true;
+  const schoolId = data.school_id;
+  schoolTables[schoolId] = {
+    columns: tableData.columns,
+    rows: tableData.rows,
+    imported: true,
+  };
+  return data;
+}
+
+async function activateListedProtocol(listedIndex) {
   const item = listedProtocols()[listedIndex];
   if (!item) return;
   if (state.school !== item.schoolId) {
@@ -839,10 +916,18 @@ function activateListedProtocol(listedIndex) {
     state.school = item.schoolId;
     bindSchoolTable();
   }
-  state.year = item.year;
+  state.year = String(item.year);
   state.protocolIndex = item.index;
   state.listedIndex = listedIndex;
+  state.protocolId = item.protocolId || null;
   openSchoolGroups.add(item.schoolId);
+  if (item.protocolId && apiReady) {
+    try {
+      await loadProtocolTable(item.protocolId);
+    } catch (error) {
+      showToast(error.message || "Не удалось открыть протокол", "error");
+    }
+  }
   renderStudents();
 }
 
@@ -850,13 +935,14 @@ function protocolAccordionHtml(item, options = {}) {
   const open = item.listedIndex === state.listedIndex;
   const showSchool = options.showSchool !== false;
   return `
-    <div class="protocol-acc${open ? " is-open" : ""}" data-listed="${item.listedIndex}" data-protocol="${item.index}" data-item-school="${item.schoolId}" data-item-year="${item.year}">
+    <div class="protocol-acc${open ? " is-open" : ""}" data-listed="${item.listedIndex}" data-protocol="${item.index}" data-protocol-id="${item.protocolId || ""}" data-item-school="${item.schoolId}" data-item-year="${item.year}">
       <div class="protocol-acc-head">
         <div class="protocol-acc-main">
           <span class="protocol-acc-title">${escapeHtml(protocolEntryLabel(item))}</span>
           <div class="protocol-acc-meta">
             ${showSchool ? `<span class="chip">${escapeHtml(item.schoolName)}</span>` : ""}
             <span class="chip is-year">${escapeHtml(item.year)}</span>
+            ${item.studentCount != null ? `<span class="chip is-count">${item.studentCount}</span>` : ""}
           </div>
         </div>
         <button class="protocol-acc-delete" type="button" data-delete-protocol="${item.listedIndex}">Удалить</button>
@@ -947,14 +1033,25 @@ function renderProtocolHeaders() {
   }
 }
 
-function deleteListedProtocol(listedIndex) {
+async function deleteListedProtocol(listedIndex) {
   const item = listedProtocols()[listedIndex];
   if (!item) return;
   if (!confirm(`Удалить протокол «${item.subject || item.title}»?`)) return;
-  const list = PROTOCOL_TITLES_BY_SCHOOL[item.schoolId]?.[item.year];
-  if (list) list.splice(item.index, 1);
+  if (item.protocolId && apiReady) {
+    try {
+      await apiSend(`/api/protocols/${item.protocolId}`, "DELETE");
+      await refreshCatalog();
+    } catch (error) {
+      showToast(error.message || "Не удалось удалить протокол", "error");
+      return;
+    }
+  } else {
+    const list = PROTOCOL_TITLES_BY_SCHOOL[item.schoolId]?.[item.year];
+    if (list) list.splice(item.index, 1);
+  }
   state.listedIndex = null;
   state.protocolIndex = null;
+  state.protocolId = null;
   renderProtocolHeaders();
   renderSchoolProtocolMenu();
   renderStats();
@@ -1001,14 +1098,26 @@ function protocolCountForStats() {
   return count;
 }
 
-function renderStats() {
+async function renderStats() {
   const cards = document.getElementById("stats-cards");
   const schoolsBody = document.getElementById("stats-schools-body");
   const studentsBody = document.getElementById("stats-students-body");
   if (!cards || !schoolsBody || !studentsBody) return;
   populateFilterOptions();
-  const rows = collectStatRows();
   const threshold = Number(document.getElementById("stats-threshold")?.value || 59);
+  let rows = collectStatRows();
+  let protocolCount = protocolCountForStats();
+  if (apiReady) {
+    try {
+      const data = await apiGet(
+        `/api/stats?year=${encodeURIComponent(document.getElementById("stats-year")?.value || "all")}&school=${encodeURIComponent(document.getElementById("stats-school")?.value || "all")}&threshold=${threshold}`
+      );
+      rows = data.rows || [];
+      protocolCount = data.protocolCount || 0;
+    } catch (error) {
+      showToast(error.message || "Не удалось загрузить статистику", "error");
+    }
+  }
   const avg = rows.length ? rows.reduce((sum, row) => sum + row.score, 0) / rows.length : 0;
   const passed = rows.filter((row) => Number(row.mark) >= 3 || row.score >= 32).length;
   const high = rows.filter((row) => row.score > threshold);
@@ -1016,7 +1125,7 @@ function renderStats() {
     <div class="stat-card"><div class="stat-value">${rows.length}</div><div class="stat-label">Участников</div></div>
     <div class="stat-card"><div class="stat-value">${new Set(rows.map((row) => row.schoolId)).size}</div><div class="stat-label">Школ</div></div>
     <div class="stat-card"><div class="stat-value">${avg ? avg.toFixed(1) : "—"}</div><div class="stat-label">Средний балл</div></div>
-    <div class="stat-card"><div class="stat-value">${protocolCountForStats()}</div><div class="stat-label">Протоколов</div></div>
+    <div class="stat-card"><div class="stat-value">${protocolCount}</div><div class="stat-label">Протоколов</div></div>
   `;
   const bySchool = SCHOOLS.map((school) => {
     const schoolRows = rows.filter((row) => row.schoolId === school.id);
@@ -1041,10 +1150,22 @@ function renderStats() {
     : `<tr><td colspan="4">Нет учеников с баллом выше ${threshold}</td></tr>`;
 }
 
-function renderDocuments() {
+async function renderDocuments() {
   const body = document.getElementById("docs-body");
   if (!body) return;
-  const docs = currentDocuments();
+  let docs = currentDocuments();
+  if (apiReady) {
+    try {
+      const items = await apiGet(`/api/documents?school=${encodeURIComponent(state.school)}`);
+      docs = items.map((doc) => ({
+        name: doc.name,
+        type: doc.format || "EXCEL",
+        date: formatDocDate(doc.created_at),
+      }));
+    } catch {
+      docs = [];
+    }
+  }
   if (!docs.length) {
     body.innerHTML = `<div class="docs-row"><div class="docs-col-name">Нет отчётов для этой школы</div><div class="docs-col-type"></div><div class="docs-col-date"></div><div class="docs-col-actions"></div></div>`;
     return;
@@ -1063,6 +1184,49 @@ function renderDocuments() {
     .join("");
 }
 
+async function renderAllStudents() {
+  const body = document.getElementById("students-body");
+  const subtitle = document.getElementById("students-page-subtitle");
+  if (!body) return;
+  const query = document.getElementById("students-search")?.value.trim() || "";
+  let rows = [];
+  if (apiReady) {
+    try {
+      const params = new URLSearchParams();
+      if (query) params.set("q", query);
+      rows = await apiGet(`/api/students?${params.toString()}`);
+    } catch (error) {
+      showToast(error.message || "Не удалось загрузить учеников", "error");
+    }
+  }
+  if (subtitle) {
+    subtitle.textContent = rows.length ? `${rows.length} учеников · все школы` : "Нет загруженных учеников";
+  }
+  if (!rows.length) {
+    body.innerHTML = `<tr><td colspan="11">Нет учеников. Загрузите Excel-файл в протоколы.</td></tr>`;
+    return;
+  }
+  body.innerHTML = rows
+    .map(
+      (row, index) => `
+      <tr data-protocol-id="${row.protocol_id || ""}" data-school-id="${row.school_id || ""}">
+        <td>${index + 1}</td>
+        <td>${escapeHtml(row.last_name || "")}</td>
+        <td>${escapeHtml(row.first_name || "")}</td>
+        <td>${escapeHtml(row.middle_name || "")}</td>
+        <td>${escapeHtml(row.klass || "")}</td>
+        <td>${escapeHtml(row.school_name || "")}</td>
+        <td>${escapeHtml(row.oo || "")}</td>
+        <td>${escapeHtml(row.subject || "")}</td>
+        <td>${escapeHtml(row.year || "")}</td>
+        <td>${row.primary_score ?? "—"}</td>
+        <td>${row.test_score ?? "—"}</td>
+      </tr>
+    `
+    )
+    .join("");
+}
+
 function formatPreviewDate(value) {
   if (!value) return "—";
   const [year, month, day] = value.split("-");
@@ -1070,8 +1234,8 @@ function formatPreviewDate(value) {
 }
 
 function getReportSubject(title) {
-  const match = title.match(/[“"«]([^”"»]+)[”"»]/);
-  return match ? match[1] : "Русский язык";
+  const match = String(title || "").match(/[“"«]([^”"»]+)[”"»]/);
+  return match ? match[1] : state.subject || "";
 }
 
 function cellByHeader(row, names) {
@@ -1099,9 +1263,8 @@ function renderReportPreview() {
       <div class="preview-doc-subject">«${subject}»</div>
     </header>
     <div class="preview-doc-meta">
-      <div><span>Код МСУ:</span> <b>220</b></div>
-      <div><span>Код ОО:</span> <b>22108</b></div>
-      <div><span>Код ППЭ:</span> <b>225</b></div>
+      <div><span>Код ОО:</span> <b>${escapeHtml(currentSchool().oo || "—")}</b></div>
+      <div><span>Код ППЭ:</span> <b>${escapeHtml(currentSchool().ppe || cellByHeader(rows[0] || { cells: [] }, "ППЭ") || "—")}</b></div>
       <div><span>Дата:</span> <b>${date}</b></div>
     </div>
     <table class="preview-doc-table">
@@ -1159,11 +1322,12 @@ function renderReportPreview() {
   `;
 }
 
-function setYear(year) {
+async function setYear(year) {
   if (year === "all") {
     state.scope = "all";
     state.listedIndex = null;
     state.protocolIndex = null;
+    if (apiReady) await refreshCatalog();
     renderYearTabs("year-tabs", true);
     renderYearTabs("school-year-tabs", true);
     document.querySelectorAll("[data-year-nav]").forEach((btn) => btn.classList.remove("is-active"));
@@ -1181,6 +1345,7 @@ function setYear(year) {
     state.scope = "year";
   }
   state.listedIndex = null;
+  if (apiReady) await refreshCatalog();
   renderYearTabs("year-tabs", true);
   renderYearTabs("school-year-tabs", true);
   document.querySelectorAll("[data-year-nav]").forEach((btn) => {
@@ -1208,7 +1373,7 @@ function setGrade(grade) {
 
 function showView(view) {
   state.view = view;
-  ["protocols", "report", "stats", "schools", "forms", "settings"].forEach((id) => {
+  ["protocols", "report", "stats", "schools", "students", "forms", "settings"].forEach((id) => {
     const el = document.getElementById(`view-${id}`);
     if (el) el.classList.toggle("hidden", id !== view);
   });
@@ -1222,6 +1387,9 @@ function showView(view) {
     renderYearTabs("school-year-tabs", true);
     renderSchoolProtocolMenu();
     updateSchoolUi();
+  }
+  if (view === "students") {
+    renderAllStudents();
   }
   if (view === "stats") {
     renderStats();
@@ -1393,11 +1561,11 @@ document.getElementById("report-subject-tabs").addEventListener("click", (event)
   setSubject(tab.dataset.subject);
 });
 
-document.querySelectorAll("[data-school-nav]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    setSchool(btn.dataset.schoolNav);
-    showView("schools");
-  });
+document.querySelector('[data-group="schools"] .nav-subs')?.addEventListener("click", (event) => {
+  const btn = event.target.closest("[data-school-nav]");
+  if (!btn) return;
+  setSchool(btn.dataset.schoolNav);
+  showView("schools");
 });
 
 document.getElementById("school-trigger").addEventListener("click", (event) => {
@@ -1453,16 +1621,16 @@ document.getElementById("report-title-trigger").addEventListener("click", (event
   dropdown.classList.toggle("is-open", willOpen);
 });
 
-document.querySelectorAll('[data-dropdown="report-title"] [role="option"]').forEach((option) => {
-  option.addEventListener("click", (event) => {
-    event.stopPropagation();
-    document.getElementById("report-title-label").textContent = option.textContent.trim();
-    option.closest("[data-dropdown]").querySelectorAll("[role='option']").forEach((item) => {
-      item.setAttribute("aria-selected", String(item === option));
-    });
-    closeDropdowns();
-    setSubject(getReportSubject(option.textContent.trim()));
+document.querySelector('[data-dropdown="report-title"] .dropdown-menu')?.addEventListener("click", (event) => {
+  const option = event.target.closest("[role='option']");
+  if (!option) return;
+  event.stopPropagation();
+  document.getElementById("report-title-label").textContent = option.textContent.trim();
+  option.closest("[data-dropdown]").querySelectorAll("[role='option']").forEach((item) => {
+    item.setAttribute("aria-selected", String(item === option));
   });
+  closeDropdowns();
+  setSubject(getReportSubject(option.textContent.trim()));
 });
 
 function closeDropdowns() {
@@ -1599,11 +1767,6 @@ document.getElementById("protocols-table-wrap").addEventListener("dblclick", (ev
     const col = Number(cell.dataset.col);
     if (!row || Number.isNaN(col)) return;
     row.cells[col] = value;
-    const student = STUDENTS.find((item) => String(item.id) === String(row.id));
-    if (student && !tableData.imported) {
-      const keys = ["id", "msu", "oo", "klass", "ppe", "room", "last", "first", "middle", "series", "number", "short", "long", "score", "grade"];
-      if (keys[col]) student[keys[col]] = value;
-    }
     if (/класс/i.test(tableData.columns[col] || "")) renderStudents();
   });
 });
@@ -1685,11 +1848,58 @@ document.getElementById("upload-files-btn").addEventListener("click", () => {
   document.getElementById("report-file").click();
 });
 
+function bytesToBase64(bytes) {
+  let binary = "";
+  const chunk = 0x8000;
+  for (let index = 0; index < bytes.length; index += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + chunk));
+  }
+  return btoa(binary);
+}
+
 function todayLabel() {
   const now = new Date();
   const day = String(now.getDate()).padStart(2, "0");
   const month = String(now.getMonth() + 1).padStart(2, "0");
   return `${day}.${month}.${now.getFullYear()}`;
+}
+
+function sheetToAoa(sheet) {
+  const cells = Object.keys(sheet).filter((key) => key[0] !== "!");
+  if (!cells.length) return [];
+  let range = sheet["!ref"] ? XLSX.utils.decode_range(sheet["!ref"]) : { s: { r: 0, c: 0 }, e: { r: 0, c: 0 } };
+  cells.forEach((key) => {
+    const cell = XLSX.utils.decode_cell(key);
+    if (cell.r > range.e.r) range.e.r = cell.r;
+    if (cell.c > range.e.c) range.e.c = cell.c;
+  });
+  sheet["!ref"] = XLSX.utils.encode_range(range);
+  return XLSX.utils.sheet_to_json(sheet, {
+    header: 1,
+    defval: "",
+    raw: false,
+    blankrows: true,
+  });
+}
+
+function firstNonEmpty(row) {
+  return (row || []).map((cell) => String(cell || "").trim()).find((cell) => cell) || "";
+}
+
+function fillDownExcelRows(columns, rows) {
+  const fillIdx = columns
+    .map((name, index) => (/код оо|^оо$|мсу|ппэ|класс/i.test(name) ? index : -1))
+    .filter((index) => index >= 0);
+  if (!fillIdx.length) return rows;
+  const prev = columns.map(() => "");
+  return rows.map((row) => {
+    const cells = columns.map((_, index) => String(row.cells[index] ?? "").trim());
+    fillIdx.forEach((index) => {
+      if (cells[index]) prev[index] = cells[index];
+      else if (prev[index]) cells[index] = prev[index];
+    });
+    return { ...row, cells };
+  });
 }
 
 function parseExcelTable(buffer) {
@@ -1699,44 +1909,87 @@ function parseExcelTable(buffer) {
   const workbook = XLSX.read(buffer, { type: "array", cellDates: true });
   const sheetName = workbook.SheetNames[0];
   if (!sheetName) throw new Error("В файле нет листов");
-  const sheet = workbook.Sheets[sheetName];
-  const aoa = XLSX.utils.sheet_to_json(sheet, {
-    header: 1,
-    defval: "",
-    raw: false,
-    blankrows: false,
-  });
+  const aoa = sheetToAoa(workbook.Sheets[sheetName]);
   if (!aoa.length) throw new Error("Файл пустой");
 
-  let colCount = 0;
+  const isHeader = (row) => {
+    const joined = (row || []).map((cell) => String(cell || "")).join(" ").toLowerCase();
+    return joined.includes("фамил") && (joined.includes("мсу") || joined.includes("код оо") || joined.includes("аудитор"));
+  };
+  const isFooter = (row) => /^(средние|минимальная граница|всего участников|дата создания)/i.test(firstNonEmpty(row));
+
+  const blocks = [];
+  let current = null;
+  let title = "";
+  let pendingSubject = "";
+  let pendingDate = "";
+  let year = state.year;
+
+  const flush = () => {
+    if (!current) return;
+    current.rows = fillDownExcelRows(current.columns, current.rows);
+    if (current.rows.length) blocks.push(current);
+    current = null;
+  };
+
   aoa.forEach((row) => {
-    colCount = Math.max(colCount, row.length);
+    const cells = (row || []).map((cell) => String(cell ?? "").trim());
+    const line = cells.filter(Boolean).join(" ");
+    if (!line) return;
+    if (!title && /протокол/i.test(line)) title = line;
+    const subjectMatch = line.match(/\d+\s*-\s*(.+?)\s+(\d{4}[.\-]\d{2}[.\-]\d{2})\s*$/);
+    if (subjectMatch) {
+      pendingSubject = subjectMatch[1].trim();
+      pendingDate = subjectMatch[2].replace(/-/g, ".");
+      return;
+    }
+    const yearMatch = line.match(/\b(20\d{2})\b/);
+    if (yearMatch) year = yearMatch[1];
+    if (isHeader(cells)) {
+      flush();
+      const keep = cells.map((name, index) => (name ? index : -1)).filter((index) => index >= 0);
+      current = {
+        columns: keep.map((index) => cells[index]),
+        keep,
+        rows: [],
+        subject: pendingSubject,
+        examDate: pendingDate,
+      };
+      return;
+    }
+    if (!current || isFooter(cells)) return;
+    const rowCells = current.keep.map((col) => cells[col] || "");
+    if (rowCells.some((cell) => cell) && rowCells[0].toLowerCase() !== "№" && !rowCells.some((cell) => cell.toLowerCase() === "фамилия")) {
+      current.rows.push({ id: current.rows.length + 1, cells: rowCells });
+    }
   });
-  while (colCount > 1 && aoa.every((row) => String(row[colCount - 1] ?? "").trim() === "")) {
-    colCount -= 1;
-  }
+  flush();
+  if (!blocks.length) throw new Error("В таблице нет строк с данными");
 
-  const columns = Array.from({ length: colCount }, (_, index) => {
-    const name = String(aoa[0][index] ?? "").trim();
-    return name || `Столбец ${index + 1}`;
-  });
-  const rows = aoa
-    .slice(1)
-    .filter((row) => row.some((cell) => String(cell ?? "").trim() !== ""))
-    .map((row, index) => ({
-      id: index + 1,
-      cells: columns.map((_, col) => String(row[col] ?? "").trim()),
-    }));
-
-  if (!rows.length) throw new Error("В таблице нет строк с данными");
-  return { columns, rows, sheetName };
+  const columns = blocks[0].columns;
+  const rows = blocks.flatMap((block, blockIndex) =>
+    block.rows.map((row, index) => ({ id: `${blockIndex + 1}-${index + 1}`, cells: row.cells }))
+  );
+  const rawRows = aoa.map((row) => (row || []).map((cell) => String(cell ?? "").trim()));
+  return {
+    columns,
+    rows,
+    sheetName,
+    title,
+    subject: blocks[0].subject || pendingSubject,
+    examDate: blocks[0].examDate || pendingDate,
+    year,
+    rawRows,
+    tableCount: blocks.length,
+  };
 }
 
 function updateImportMeta() {
   const el = document.getElementById("import-modal-file");
   if (!el) return;
   const fileName = importDraft.fileName || "Таблица";
-  el.textContent = `${fileName} · ${importDraft.columns.length} столбцов · ${importDraft.rows.length} строк`;
+  const tables = importDraft.tableCount > 1 ? ` · ${importDraft.tableCount} таблиц в файле` : "";
+  el.textContent = `${fileName} · ${importDraft.columns.length} столбцов · ${importDraft.rows.length} строк${tables}`;
 }
 
 function renderImportTable() {
@@ -1772,23 +2025,41 @@ function renderImportSchoolSelect() {
   const menu = document.getElementById("import-school-menu");
   const label = document.getElementById("import-school-label");
   if (!menu || !label) return;
-  const school = SCHOOLS.find((item) => item.id === importDraft.schoolId) || SCHOOLS[0];
-  importDraft.schoolId = school.id;
-  label.textContent = school.name;
-  menu.innerHTML = SCHOOLS.map(
-    (item) => `
-      <li role="option" data-value="${item.id}" aria-selected="${item.id === school.id}">${escapeHtml(item.name)}</li>
+  const allSelected = !importDraft.schoolId || importDraft.schoolId === "all";
+  if (allSelected) importDraft.schoolId = "all";
+  const school = SCHOOLS.find((item) => item.id === importDraft.schoolId);
+  label.textContent = allSelected ? "Все школы" : school?.name || "Школа";
+  menu.innerHTML = [`<li role="option" data-value="all" aria-selected="${allSelected}">Все школы</li>`]
+    .concat(
+      SCHOOLS.map(
+        (item) => `
+      <li role="option" data-value="${item.id}" aria-selected="${!allSelected && item.id === importDraft.schoolId}">${escapeHtml(item.name)}</li>
     `
-  ).join("");
+      )
+    )
+    .join("");
+  const split = document.getElementById("import-split-schools");
+  if (split) split.checked = allSelected;
+  const hint = document.getElementById("import-split-hint");
+  if (hint) {
+    hint.textContent = allSelected
+      ? "Файл будет разложен по школам по коду ОО"
+      : "Весь файл сохранится в выбранную школу";
+  }
 }
 
 function openImportModal(fileName, parsed) {
   importDraft.fileName = fileName;
-  importDraft.schoolId = state.school;
+  importDraft.schoolId = state.scope === "school" ? state.school : "all";
   importDraft.columns = [...parsed.columns];
   importDraft.rows = parsed.rows.map((row) => ({ id: row.id, cells: [...row.cells] }));
+  importDraft.subject = parsed.subject || "";
+  importDraft.examDate = parsed.examDate || "";
+  importDraft.year = parsed.year || state.year;
+  importDraft.rawRows = parsed.rawRows || [];
+  importDraft.tableCount = parsed.tableCount || 1;
   document.getElementById("import-modal-title").textContent = "Просмотр таблицы Excel";
-  document.getElementById("import-title-input").value = protocolTitleFromFile(fileName);
+  document.getElementById("import-title-input").value = parsed.title || protocolTitleFromFile(fileName);
   renderImportSchoolSelect();
   renderImportTable();
   document.getElementById("import-modal").classList.remove("hidden");
@@ -1797,41 +2068,97 @@ function openImportModal(fileName, parsed) {
 function closeImportModal() {
   document.getElementById("import-modal").classList.add("hidden");
   importDraft.fileName = "";
+  importFileBase64 = "";
   importDraft.schoolId = state.school;
   importDraft.columns = [];
   importDraft.rows = [];
+  importDraft.rawRows = [];
+  importDraft.tableCount = 1;
   document.getElementById("report-file").value = "";
 }
 
-function saveImportedTable() {
-  const schoolId = importDraft.schoolId || state.school;
-  if (!schoolTables[schoolId]) return;
+async function saveImportedTable() {
+  const titleInput = document.getElementById("import-title-input").value.trim();
+  const title = titleInput || protocolTitleFromFile(importDraft.fileName);
+  const splitBySchool = importDraft.schoolId === "all";
+  const schoolId = splitBySchool ? undefined : importDraft.schoolId || state.school;
 
-  if (state.school !== schoolId) {
-    commitSchoolTable();
+  if (apiReady) {
+    try {
+      const result = await apiSend("/api/imports", "POST", {
+        schoolId,
+        year: importDraft.year || state.year,
+        subject: importDraft.subject || protocolSubject(title),
+        title,
+        exam_date: importDraft.examDate || "",
+        fileName: importDraft.fileName,
+        fileBase64: importFileBase64 || undefined,
+        splitBySchool,
+        columns: importDraft.columns,
+        rows: importDraft.rows.map((row) => row.cells),
+        rawRows: importDraft.rawRows?.length ? importDraft.rawRows : undefined,
+      });
+      const schools = await apiGet("/api/schools");
+      if (schools?.length) SCHOOLS.splice(0, SCHOOLS.length, ...schools);
+      await refreshCatalog();
+      closeImportModal();
+      const first = result.protocols?.[0];
+      if (first) {
+        state.school = first.schoolId;
+        state.scope = splitBySchool ? "year" : "school";
+        state.year = String(importDraft.year || state.year);
+        state.listedIndex = 0;
+        state.protocolId = first.protocolId;
+        await loadProtocolTable(first.protocolId);
+      }
+      showView("protocols");
+      updateSchoolUi();
+      renderDocuments();
+      renderStudents();
+      renderProtocolHeaders();
+      renderSchoolProtocolMenu();
+      renderSubjectTabs();
+      renderReportSubjectNav();
+      renderReportPreview();
+      renderStats();
+      const block = document.getElementById("protocol-block");
+      block.classList.remove("is-collapsed");
+      document.getElementById("protocols-toggle-label").textContent = "Скрыть";
+      document.getElementById("protocols-toggle-btn").setAttribute("aria-expanded", "true");
+      showToast(`Сохранено в базу: ${result.protocols?.length || 0} протоколов`);
+      return;
+    } catch (error) {
+      showToast(error.message || "Не удалось сохранить в базу", "error");
+      return;
+    }
   }
 
+  if (splitBySchool) {
+    showToast("Чтобы разложить файл по школам, откройте CRM через сервер", "error");
+    return;
+  }
+  if (!schoolId) return;
+  if (!schoolTables[schoolId]) {
+    schoolTables[schoolId] = { columns: [], rows: [], imported: true };
+  }
+  if (state.school !== schoolId) commitSchoolTable();
   const copied = cloneTableData(importDraft);
   schoolTables[schoolId] = {
     columns: copied.columns,
     rows: copied.rows,
     imported: true,
   };
-
-  const titleInput = document.getElementById("import-title-input").value.trim();
-  const title = titleInput || protocolTitleFromFile(importDraft.fileName);
+  if (!PROTOCOL_TITLES_BY_SCHOOL[schoolId]) PROTOCOL_TITLES_BY_SCHOOL[schoolId] = copyTitlesByYear();
   const byYear = PROTOCOL_TITLES_BY_SCHOOL[schoolId];
   if (byYear?.[state.year] && !byYear[state.year].includes(title)) {
     byYear[state.year].unshift(title);
   }
-
   if (!schoolDocuments[schoolId]) schoolDocuments[schoolId] = [];
   schoolDocuments[schoolId].unshift({
     name: title,
     type: "EXCEL",
     date: todayLabel(),
   });
-
   closeImportModal();
   state.school = schoolId;
   state.scope = "school";
@@ -1847,7 +2174,6 @@ function saveImportedTable() {
   renderSubjectTabs();
   renderReportSubjectNav();
   renderReportPreview();
-
   const block = document.getElementById("protocol-block");
   block.classList.remove("is-collapsed");
   document.getElementById("protocols-toggle-label").textContent = "Скрыть";
@@ -1861,7 +2187,9 @@ document.getElementById("report-file").addEventListener("change", (event) => {
   const reader = new FileReader();
   reader.onload = () => {
     try {
-      const parsed = parseExcelTable(new Uint8Array(reader.result));
+      const bytes = new Uint8Array(reader.result);
+      importFileBase64 = bytesToBase64(bytes);
+      const parsed = parseExcelTable(bytes);
       openImportModal(file.name, parsed);
     } catch (error) {
       alert(error.message || "Не удалось прочитать Excel-файл");
@@ -1939,11 +2267,48 @@ document.getElementById("import-school-menu").addEventListener("click", (event) 
   closeDropdowns();
 });
 
+let searchTimer = null;
 document.getElementById("protocol-search")?.addEventListener("input", (event) => {
   state.search = event.target.value;
   state.page = 1;
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(async () => {
+    if (apiReady) await refreshCatalog();
+    renderProtocolHeaders();
+    renderStudents();
+  }, 200);
+});
+
+let studentsSearchTimer = null;
+document.getElementById("students-search")?.addEventListener("input", () => {
+  clearTimeout(studentsSearchTimer);
+  studentsSearchTimer = setTimeout(() => renderAllStudents(), 200);
+});
+
+document.getElementById("students-body")?.addEventListener("click", async (event) => {
+  const row = event.target.closest("tr[data-protocol-id]");
+  if (!row || !row.dataset.protocolId) return;
+  const protocolId = Number(row.dataset.protocolId);
+  const schoolId = row.dataset.schoolId;
+  if (schoolId) {
+    state.school = schoolId;
+    state.scope = "school";
+  }
+  if (apiReady) {
+    await refreshCatalog();
+    const item = listedProtocols().find((protocol) => protocol.protocolId === protocolId);
+    if (item) await activateListedProtocol(item.listedIndex);
+    else await loadProtocolTable(protocolId);
+  }
+  showView("protocols");
+  const block = document.getElementById("protocol-block");
+  if (block) {
+    block.classList.remove("is-collapsed");
+    document.getElementById("protocols-toggle-label").textContent = "Скрыть";
+    document.getElementById("protocols-toggle-btn")?.setAttribute("aria-expanded", "true");
+  }
+  updateSchoolUi();
   renderProtocolHeaders();
-  renderStudents();
 });
 
 document.getElementById("filter-score-op")?.addEventListener("change", syncScoreFilterUi);
@@ -1983,18 +2348,109 @@ document.getElementById("settings-save")?.addEventListener("click", () => {
   showToast("Настройки сохранены");
 });
 
-bindSchoolTable();
-populateFilterOptions();
-renderYearTabs("year-tabs", true);
-renderYearTabs("school-year-tabs", true);
-renderSchoolSelect();
-renderSchoolProtocolMenu();
-updateSchoolUi();
-renderSubjectTabs();
-renderReportSubjectNav();
-renderStudents();
-renderProtocolHeaders();
-renderDocuments();
-renderReportPreview();
-renderStats();
-updateFilterBadge();
+document.getElementById("settings-wipe-db")?.addEventListener("click", async () => {
+  if (!confirm("Очистить все протоколы, таблицы и учеников? Справочник школ останется. Сначала будет сохранена копия базы.")) return;
+  if (!apiReady) {
+    showToast("Откройте CRM через сервер, чтобы очистить базу", "error");
+    return;
+  }
+  try {
+    const result = await apiSend("/api/reset", "POST", {});
+    protocolCatalog = [];
+    Object.keys(schoolTables).forEach((id) => {
+      schoolTables[id] = { columns: [], rows: [], imported: true };
+    });
+    tableData.columns = [];
+    tableData.rows = [];
+    tableData.imported = true;
+    state.listedIndex = null;
+    state.protocolId = null;
+    await refreshCatalog();
+    renderProtocolHeaders();
+    renderStudents();
+    renderAllStudents();
+    renderDocuments();
+    renderStats();
+    renderSchoolProtocolMenu();
+    showToast(`База очищена. Копия: ${result.backup || "сохранена"}`);
+  } catch (error) {
+    showToast(error.message || "Не удалось очистить базу", "error");
+  }
+});
+
+document.getElementById("settings-wipe-uploads")?.addEventListener("click", async () => {
+  if (!confirm("Удалить все загруженные Excel кроме последнего?")) return;
+  if (!apiReady) {
+    showToast("Откройте CRM через сервер, чтобы очистить uploads", "error");
+    return;
+  }
+  try {
+    const result = await apiSend("/api/reset-uploads", "POST", {});
+    const kept = result.kept ? `Оставлен: ${result.kept}` : "Папка uploads пуста";
+    showToast(`${kept}. Удалено: ${result.deleted ?? 0}`);
+  } catch (error) {
+    showToast(error.message || "Не удалось очистить uploads", "error");
+  }
+});
+
+document.getElementById("settings-wipe-backups")?.addEventListener("click", async () => {
+  if (!confirm("Удалить все бэкапы базы кроме двух последних?")) return;
+  if (!apiReady) {
+    showToast("Откройте CRM через сервер, чтобы очистить backups", "error");
+    return;
+  }
+  try {
+    const result = await apiSend("/api/reset-backups", "POST", {});
+    const kept = Array.isArray(result.kept) && result.kept.length
+      ? `Оставлены: ${result.kept.join(", ")}`
+      : "Папка backups пуста";
+    showToast(`${kept}. Удалено: ${result.deleted ?? 0}`);
+  } catch (error) {
+    showToast(error.message || "Не удалось очистить backups", "error");
+  }
+});
+
+async function bootstrapFromApi() {
+  try {
+    const data = await apiGet("/api/bootstrap");
+    if (data.schools?.length) SCHOOLS.splice(0, SCHOOLS.length, ...data.schools);
+    protocolCatalog = data.protocols || [];
+    apiReady = true;
+    if (SCHOOLS.length && !SCHOOLS.some((item) => item.id === state.school)) {
+      state.school = SCHOOLS[0].id;
+    }
+    const subjects = [...new Set(protocolCatalog.map((item) => item.subject).filter(Boolean))];
+    if (subjects.length && !subjects.includes(state.subject)) state.subject = subjects[0];
+    SCHOOLS.forEach((school) => {
+      schoolTables[school.id] = { columns: [], rows: [], imported: true };
+    });
+    tableData.columns = [];
+    tableData.rows = [];
+    tableData.imported = true;
+  } catch {
+    apiReady = false;
+  }
+}
+
+function renderApp() {
+  bindSchoolTable();
+  populateFilterOptions();
+  renderYearTabs("year-tabs", true);
+  renderYearTabs("school-year-tabs", true);
+  renderSchoolSelect();
+  renderSchoolNav();
+  renderSchoolsTable();
+  renderSchoolProtocolMenu();
+  updateSchoolUi();
+  renderSubjectTabs();
+  renderReportSubjectNav();
+  renderReportTitleOptions();
+  renderStudents();
+  renderProtocolHeaders();
+  renderDocuments();
+  renderReportPreview();
+  renderStats();
+  updateFilterBadge();
+}
+
+bootstrapFromApi().finally(renderApp);

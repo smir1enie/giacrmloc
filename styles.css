@@ -214,14 +214,13 @@ img {
 
 .app-shell {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   min-height: calc(100vh - 72px);
   background: var(--bg-white);
   border-radius: 20px;
-  overflow: hidden;
   box-shadow: var(--shadow-app);
 }
 
@@ -236,9 +235,15 @@ img {
   gap: 16px;
   width: var(--sidebar-w);
   flex-shrink: 0;
+  position: sticky;
+  top: 40px;
+  align-self: flex-start;
+  max-height: calc(100vh - 72px);
+  overflow-y: auto;
   padding: 20px 14px;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
+  border-radius: 20px 0 0 20px;
 }
 
 .profile-header {
@@ -429,6 +434,7 @@ img {
   flex: 1;
   min-width: 0;
   background: var(--bg-white);
+  border-radius: 0 20px 20px 0;
 }
 
 .main-content {
@@ -1606,6 +1612,20 @@ img {
   color: var(--text);
 }
 
+.import-split {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.import-split input {
+  display: none;
+}
+
 .import-modal-file {
   margin-top: 8px;
   font-size: 13px;
@@ -1822,7 +1842,9 @@ img {
     transform: translateX(-100%);
     transition: transform 0.2s ease;
     height: 100vh;
+    max-height: none;
     overflow-y: auto;
+    border-radius: 0;
   }
 
   .sidebar.is-open {
@@ -2236,7 +2258,11 @@ img {
 }
 
 .data-table tbody tr:hover td {
-  background: #90caf9;
+  background: #cfe4f8;
+}
+
+#students-table tbody tr[data-protocol-id] {
+  cursor: pointer;
 }
 
 .stat-card:hover {

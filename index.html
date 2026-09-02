@@ -58,6 +58,20 @@
               </div>
             </div>
 
+            <div class="nav-group is-collapsed" data-group="schools">
+              <button class="nav-group-header" type="button" data-toggle-group="schools" data-nav="schools">
+                <span>Школы</span>
+                <span class="icon icon-10 nav-chevron">
+                  <img src="./assets/icons/chevron-up.svg" width="10" height="10" alt="" />
+                </span>
+              </button>
+              <div class="nav-subs"></div>
+            </div>
+
+            <button class="nav-group-header" type="button" data-nav="students">
+              <span>Ученики</span>
+            </button>
+
             <div class="nav-group is-collapsed" data-group="reports">
               <button class="nav-group-header" type="button" data-toggle-group="reports" data-nav="report">
                 <span>Отчёты</span>
@@ -66,32 +80,6 @@
                 </span>
               </button>
               <div class="nav-subs" id="report-subject-nav"></div>
-            </div>
-
-            <button class="nav-group-header" type="button" data-nav="stats">
-              <span>Статистика</span>
-            </button>
-
-            <div class="nav-group is-collapsed" data-group="schools">
-              <button class="nav-group-header" type="button" data-toggle-group="schools" data-nav="schools">
-                <span>Школы</span>
-                <span class="icon icon-10 nav-chevron">
-                  <img src="./assets/icons/chevron-up.svg" width="10" height="10" alt="" />
-                </span>
-              </button>
-              <div class="nav-subs">
-                <button class="nav-sub" type="button" data-school-nav="1">МБОУ СОШ № 1</button>
-                <button class="nav-sub" type="button" data-school-nav="2">МБОУ СОШ № 2</button>
-                <button class="nav-sub" type="button" data-school-nav="3">МБОУ СОШ № 3</button>
-                <button class="nav-sub" type="button" data-school-nav="4">МБОУ СОШ № 4</button>
-                <button class="nav-sub" type="button" data-school-nav="5">МБОУ СОШ № 5</button>
-                <button class="nav-sub" type="button" data-school-nav="6">МБОУ СОШ № 6</button>
-                <button class="nav-sub" type="button" data-school-nav="7">МБОУ СОШ № 7</button>
-                <button class="nav-sub" type="button" data-school-nav="8">МБОУ СОШ № 8</button>
-                <button class="nav-sub" type="button" data-school-nav="9">МБОУ СОШ № 9</button>
-                <button class="nav-sub" type="button" data-school-nav="10">МБОУ СОШ № 10</button>
-                <button class="nav-sub" type="button" data-school-nav="gym1">Гимназия № 1</button>
-              </div>
             </div>
 
             <button class="nav-group-header" type="button" data-nav="forms">
@@ -246,24 +234,12 @@
                   <span class="input-label">Название</span>
                   <div class="dropdown title-listbox" data-dropdown="report-title">
                     <button class="field title-listbox-trigger" type="button" id="report-title-trigger">
-                      <span id="report-title-label">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Русский язык”</span>
+                      <span id="report-title-label">Нет протоколов</span>
                       <span class="icon icon-12">
                         <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
                       </span>
                     </button>
-                    <ul class="dropdown-menu title-listbox-menu" role="listbox" aria-label="Название">
-                      <li role="option" aria-selected="true">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Русский язык”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Базовая математика”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Профильная математика”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Обществознание”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Физика”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Химия и Биология”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “История”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Литература”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “География”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Информатика”</li>
-                      <li role="option">Протокол проверки результатов государственной итоговой аттестации обучающихся, освоивших основные образовательные программы основного общего образования “Иностранные языки”</li>
-                    </ul>
+                    <ul class="dropdown-menu title-listbox-menu" role="listbox" aria-label="Название"></ul>
                   </div>
                 </label>
                 <label class="input-group">
@@ -283,7 +259,7 @@
                 <label class="input-group">
                   <span class="input-label">Дата</span>
                   <span class="field">
-                    <input type="date" id="report-date" value="2026-07-11" />
+                    <input type="date" id="report-date" />
                     <span class="icon icon-12">
                       <img src="./assets/icons/calendar.svg" width="12" height="12" alt="" />
                     </span>
@@ -350,7 +326,7 @@
                   </button>
                 </div>
                 <div class="pagination">
-                  <span class="page-count">1-3/3</span>
+                  <span class="page-count">0 записей</span>
                   <div class="arrows">
                     <button class="pager-btn" type="button" aria-label="Назад">
                       <span class="icon icon-12">
@@ -485,7 +461,7 @@
             <div class="school-select-bar">
               <div class="dropdown" data-dropdown="school">
                 <button class="select school-select-trigger" type="button" id="school-trigger">
-                  <span id="school-label">МБОУ СОШ № 1</span>
+                  <span id="school-label">Школа</span>
                   <span class="icon icon-12">
                     <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
                   </span>
@@ -505,25 +481,53 @@
                 <thead>
                   <tr>
                     <th>Код ОО</th>
-                    <th>Код МСУ</th>
+                    <th>Код ППЭ</th>
                     <th>Название</th>
                     <th>Населённый пункт</th>
                     <th>Статус</th>
                   </tr>
                 </thead>
-                <tbody id="schools-body">
-                  <tr data-school="1"><td>22101</td><td>220</td><td>МБОУ СОШ № 1</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="2"><td>22102</td><td>220</td><td>МБОУ СОШ № 2</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="3"><td>22103</td><td>220</td><td>МБОУ СОШ № 3</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="4"><td>22104</td><td>220</td><td>МБОУ СОШ № 4</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="5"><td>22105</td><td>220</td><td>МБОУ СОШ № 5</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="6"><td>22106</td><td>220</td><td>МБОУ СОШ № 6</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="7"><td>22107</td><td>220</td><td>МБОУ СОШ № 7</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="8"><td>22108</td><td>220</td><td>МБОУ СОШ № 8</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="9"><td>22109</td><td>220</td><td>МБОУ СОШ № 9</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="10"><td>22110</td><td>220</td><td>МБОУ СОШ № 10</td><td>Кемерово</td><td>Активна</td></tr>
-                  <tr data-school="gym1"><td>22111</td><td>220</td><td>Гимназия № 1</td><td>Кемерово</td><td>Активна</td></tr>
-                </tbody>
+                <tbody id="schools-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="main-content hidden" id="view-students">
+            <div class="header-row">
+              <div class="title-with-status">
+                <button class="menu-toggle" type="button" data-open-menu aria-label="Меню">
+                  <span></span>
+                </button>
+                <div class="title-stack">
+                  <h1 class="page-title">Ученики</h1>
+                  <p class="page-subtitle" id="students-page-subtitle">Все школы · все годы</p>
+                </div>
+              </div>
+              <label class="search-container">
+                <span class="icon icon-14">
+                  <img src="./assets/icons/search.svg" width="14" height="14" alt="" />
+                </span>
+                <input type="search" id="students-search" placeholder="Фамилия, имя, школа или предмет" />
+              </label>
+            </div>
+            <div class="table-scroll">
+              <table class="data-table" id="students-table">
+                <thead>
+                  <tr>
+                    <th>№</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Класс</th>
+                    <th>Школа</th>
+                    <th>Код ОО</th>
+                    <th>Предмет</th>
+                    <th>Год</th>
+                    <th>Первичный</th>
+                    <th>Тестовый</th>
+                  </tr>
+                </thead>
+                <tbody id="students-body"></tbody>
               </table>
             </div>
           </div>
@@ -547,31 +551,8 @@
                     <th>Дата обновления</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Протокол проверки результатов ГИА</td>
-                    <td>WORD</td>
-                    <td>ЕГЭ / ОГЭ</td>
-                    <td>11.07.2026</td>
-                  </tr>
-                  <tr>
-                    <td>Ведомость участников экзамена</td>
-                    <td>EXCEL</td>
-                    <td>ППЭ</td>
-                    <td>03.06.2026</td>
-                  </tr>
-                  <tr>
-                    <td>Акт готовности пункта проведения</td>
-                    <td>PDF</td>
-                    <td>ППЭ</td>
-                    <td>20.05.2026</td>
-                  </tr>
-                  <tr>
-                    <td>Бланк апелляции о несогласии с выставленными баллами</td>
-                    <td>PDF</td>
-                    <td>Конфликтная комиссия</td>
-                    <td>14.05.2026</td>
-                  </tr>
+                <tbody id="forms-body">
+                  <tr><td colspan="4">Нет загруженных форм</td></tr>
                 </tbody>
               </table>
             </div>
@@ -618,6 +599,15 @@
                 </label>
               </div>
               <button class="btn-primary" type="button" id="settings-save">Сохранить</button>
+            </section>
+            <section class="uploaded-list-section">
+              <h2 class="section-title">База данных</h2>
+              <p class="page-subtitle">Сохраняет копию базы и удаляет протоколы, таблицы и учеников. Справочник школ остаётся.</p>
+              <button class="btn-danger" type="button" id="settings-wipe-db">backup bd (о_о )</button>
+              <p class="page-subtitle">Удаляет все загруженные Excel в uploads, кроме последнего.</p>
+              <button class="btn-danger" type="button" id="settings-wipe-uploads">backup upload ^-^</button>
+              <p class="page-subtitle">Удаляет все копии базы в backups, кроме двух последних.</p>
+              <button class="btn-danger" type="button" id="settings-wipe-backups">b ty b =)</button>
             </section>
           </div>
         </section>
@@ -740,7 +730,7 @@
               <span class="input-label">Школа</span>
               <div class="dropdown" data-dropdown="import-school">
                 <button class="select school-select-trigger" type="button" id="import-school-trigger">
-                  <span id="import-school-label">МБОУ СОШ № 1</span>
+                  <span id="import-school-label">Школа</span>
                   <span class="icon icon-12">
                     <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
                   </span>
@@ -749,6 +739,10 @@
               </div>
             </div>
           </div>
+          <label class="import-split">
+            <input type="checkbox" id="import-split-schools" checked hidden />
+            <span id="import-split-hint">При выборе «Все школы» файл разбивается по коду ОО</span>
+          </label>
           <p class="import-modal-file" id="import-modal-file"></p>
         </div>
         <div class="import-table-toolbar">
