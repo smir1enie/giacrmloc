@@ -64,6 +64,7 @@ class Handler(SimpleHTTPRequestHandler):
                         {
                             "schools": db.list_schools(conn),
                             "protocols": db.list_protocols(conn),
+                            "subjects": db.list_subjects(conn),
                         }
                     )
                 )
@@ -106,6 +107,7 @@ class Handler(SimpleHTTPRequestHandler):
                             conn,
                             year=query.get("year", "all"),
                             school_id=query.get("school", "all"),
+                            subject=query.get("subject", "all"),
                             threshold=float(query.get("threshold") or 59),
                         )
                     )

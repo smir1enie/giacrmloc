@@ -623,9 +623,22 @@ def add_document(conn, school_id, name, fmt, protocol_id=None):
     conn.commit()
 
 
-def stats(conn, year="all", school_id="all", threshold=59):
+def list_subjects(conn, year="all", school_id="all"):
+    sql = "SELECT DISTINCT subject FROM protocols WHERE ifnull(subject,'') != ''"
+    params = []
+    if year and year != "all":
+        sql += " AND year = ?"
+        params.append(int(year))
+    if school_id and school_id != "all":
+        sql += " AND school_id = ?"
+        params.append(school_id)
+    rows = [row[0] for row in conn.execute(sql, params)]
+    return sorted(rows, key=lambda value: str(value).casefold())
+
+
+def stats(conn, year="all", school_id="all", subject="all", threshold=59):
     sql = """
-      SELECT p.school_id, s.name AS school_name, st.last_name, st.first_name,
+      SELECT p.school_id, s.name AS school_name, p.subject, st.last_name, st.first_name,
              st.klass, st.test_score, st.primary_score, st.mark
       FROM protocol_students st
       JOIN protocols p ON p.id = st.protocol_id
@@ -639,6 +652,9 @@ def stats(conn, year="all", school_id="all", threshold=59):
     if school_id and school_id != "all":
         sql += " AND p.school_id = ?"
         params.append(school_id)
+    if subject and subject != "all":
+        sql += " AND p.subject = ?"
+        params.append(subject)
     rows = []
     for row in conn.execute(sql, params):
         score = row["test_score"] if row["test_score"] is not None else row["primary_score"]
@@ -646,6 +662,7 @@ def stats(conn, year="all", school_id="all", threshold=59):
             {
                 "schoolId": row["school_id"],
                 "schoolName": row["school_name"],
+                "subject": row["subject"] or "",
                 "name": f"{row['last_name'] or ''} {row['first_name'] or ''}".strip() or "Без имени",
                 "klass": row["klass"] or "",
                 "score": float(score or 0),
@@ -660,8 +677,16 @@ def stats(conn, year="all", school_id="all", threshold=59):
     if school_id and school_id != "all":
         protocol_sql += " AND school_id = ?"
         protocol_params.append(school_id)
+    if subject and subject != "all":
+        protocol_sql += " AND subject = ?"
+        protocol_params.append(subject)
     protocol_count = conn.execute(protocol_sql, protocol_params).fetchone()[0]
-    return {"rows": rows, "protocolCount": protocol_count, "threshold": threshold}
+    return {
+        "rows": rows,
+        "protocolCount": protocol_count,
+        "threshold": threshold,
+        "subjects": list_subjects(conn, year=year, school_id=school_id),
+    }
 
 
 def read_csv_rows(path):

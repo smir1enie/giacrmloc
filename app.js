@@ -51,6 +51,7 @@ function currentProtocolTitles() {
 const API_BASE = "";
 let apiReady = false;
 let protocolCatalog = [];
+let catalogSubjects = [];
 let importFileBase64 = "";
 
 async function apiGet(path) {
@@ -202,6 +203,25 @@ function updateFilterBadge() {
   badge.classList.toggle("hidden", count === 0);
 }
 
+function fillStatsSubjectMenu(subjects) {
+  const select = document.getElementById("stats-subject");
+  if (!select) return;
+  const unique = [...new Set((subjects || []).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ru"));
+  const current = unique.includes(select.value) ? select.value : "all";
+  select.replaceChildren();
+  const all = document.createElement("option");
+  all.value = "all";
+  all.textContent = "Все предметы";
+  select.append(all);
+  unique.forEach((name) => {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    select.append(option);
+  });
+  select.value = current;
+}
+
 function fillSelect(id, values, selected) {
   const select = document.getElementById(id);
   if (!select) return;
@@ -230,6 +250,28 @@ function populateFilterOptions() {
       .concat(SCHOOLS.map((item) => `<option value="${item.id}">${escapeHtml(item.name)}</option>`))
       .join("");
     statsSchool.value = [...statsSchool.options].some((opt) => opt.value === current) ? current : "all";
+  }
+  const statsSubject = document.getElementById("stats-subject");
+  if (statsSubject) {
+    const year = document.getElementById("stats-year")?.value || "all";
+    const schoolId = document.getElementById("stats-school")?.value || "all";
+    const fromCatalog = protocolCatalog
+      .filter((item) => {
+        if (year !== "all" && String(item.year) !== String(year)) return false;
+        if (schoolId !== "all" && item.school_id !== schoolId) return false;
+        return Boolean(item.subject);
+      })
+      .map((item) => item.subject);
+    fillStatsSubjectMenu([...new Set([...catalogSubjects, ...fromCatalog])].filter(Boolean));
+  }
+  const statsYear = document.getElementById("stats-year");
+  if (statsYear) {
+    const current = statsYear.value || "all";
+    const years = [...new Set([...YEARS, ...protocolCatalog.map((item) => String(item.year || "")).filter(Boolean)])];
+    statsYear.innerHTML = [`<option value="all">Все годы</option>`]
+      .concat(years.map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`))
+      .join("");
+    statsYear.value = [...statsYear.options].some((opt) => opt.value === current) ? current : "2026";
   }
 }
 
@@ -1060,6 +1102,8 @@ async function deleteListedProtocol(listedIndex) {
 
 function collectStatRows() {
   const schoolId = document.getElementById("stats-school")?.value || "all";
+  const subject = document.getElementById("stats-subject")?.value || "all";
+  const year = document.getElementById("stats-year")?.value || "all";
   const schools = schoolId === "all" ? SCHOOLS : SCHOOLS.filter((item) => item.id === schoolId);
   const rows = [];
   schools.forEach((school) => {
@@ -1074,6 +1118,8 @@ function collectStatRows() {
       rows.push({
         schoolId: school.id,
         schoolName: school.name,
+        subject: state.subject || "",
+        year,
         score: Number(String(row.cells[scoreIndex] || "").replace(",", ".")) || 0,
         mark: String(row.cells[markIndex] || ""),
         klass: String(row.cells[klassIndex] || ""),
@@ -1081,12 +1127,21 @@ function collectStatRows() {
       });
     });
   });
-  return rows;
+  return subject === "all" ? rows : rows.filter((row) => row.subject === subject);
 }
 
 function protocolCountForStats() {
   const schoolId = document.getElementById("stats-school")?.value || "all";
   const year = document.getElementById("stats-year")?.value || "all";
+  const subject = document.getElementById("stats-subject")?.value || "all";
+  if (apiReady) {
+    return protocolCatalog.filter((item) => {
+      if (schoolId !== "all" && item.school_id !== schoolId) return false;
+      if (year !== "all" && String(item.year) !== String(year)) return false;
+      if (subject !== "all" && item.subject !== subject) return false;
+      return true;
+    }).length;
+  }
   const schools = schoolId === "all" ? SCHOOLS : SCHOOLS.filter((item) => item.id === schoolId);
   const years = year === "all" ? YEARS : [year];
   let count = 0;
@@ -1098,6 +1153,202 @@ function protocolCountForStats() {
   return count;
 }
 
+function statsPassed(row) {
+  const mark = Number(row.mark);
+  return (Number.isFinite(mark) && mark >= 3) || row.score >= 32;
+}
+
+function statsGroupKey() {
+  const schoolId = document.getElementById("stats-school")?.value || "all";
+  const subject = document.getElementById("stats-subject")?.value || "all";
+  return schoolId !== "all" && subject === "all" ? "subject" : "school";
+}
+
+function groupStatAverages(rows) {
+  const bySubject = statsGroupKey() === "subject";
+  const groups = new Map();
+  rows.forEach((row) => {
+    const key = bySubject ? (row.subject || "Без предмета") : (row.schoolId || "none");
+    const label = bySubject ? (row.subject || "Без предмета") : (row.schoolName || key);
+    if (!groups.has(key)) groups.set(key, { key, label, schoolId: bySubject ? "" : row.schoolId, scores: [], passed: 0 });
+    const group = groups.get(key);
+    group.scores.push(row.score);
+    if (statsPassed(row)) group.passed += 1;
+  });
+  return [...groups.values()]
+    .map((group) => ({
+      key: group.key,
+      label: group.label,
+      schoolId: group.schoolId,
+      count: group.scores.length,
+      avg: group.scores.length ? group.scores.reduce((sum, value) => sum + value, 0) / group.scores.length : 0,
+      passed: group.passed,
+      failed: group.scores.length - group.passed,
+    }))
+    .sort((a, b) => b.avg - a.avg);
+}
+
+function statsMarkSlices(rows) {
+  const counts = new Map();
+  rows.forEach((row) => {
+    const mark = String(row.mark || "").trim();
+    const label = mark || "Без оценки";
+    counts.set(label, (counts.get(label) || 0) + 1);
+  });
+  if (![...counts.keys()].some((label) => label !== "Без оценки")) {
+    const passed = rows.filter(statsPassed).length;
+    return [
+      { label: "Сдали", value: passed },
+      { label: "Не сдали", value: rows.length - passed },
+    ].filter((item) => item.value > 0);
+  }
+  const order = ["5", "4", "3", "2", "1", "Без оценки"];
+  return [...counts.entries()]
+    .map(([label, value]) => ({ label, value }))
+    .sort((a, b) => {
+      const ia = order.indexOf(a.label);
+      const ib = order.indexOf(b.label);
+      if (ia !== -1 || ib !== -1) return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+      return b.value - a.value;
+    });
+}
+
+const STAT_CHART_COLORS = ["#1e88e5", "#43a047", "#fb8c00", "#e53935", "#8e24aa", "#00897b", "#1565c0", "#6d4c41", "#5e35b1", "#00acc1"];
+
+function fitStatsCanvas(canvas, cssHeight) {
+  const wrap = canvas.parentElement;
+  const width = Math.max(160, wrap.clientWidth || 320);
+  const height = cssHeight;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+  return { ctx, width, height };
+}
+
+function drawStatsEmpty(canvas, height, message) {
+  const { ctx, width } = fitStatsCanvas(canvas, height);
+  ctx.fillStyle = "#9ca3af";
+  ctx.font = "500 14px Inter, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(message, width / 2, height / 2);
+}
+
+function shortStatLabel(text, max = 16) {
+  const value = String(text || "");
+  return value.length > max ? `${value.slice(0, max - 1)}…` : value;
+}
+
+function drawStatsBarChart(canvas, groups) {
+  if (!canvas) return;
+  if (!groups.length) {
+    drawStatsEmpty(canvas, 280, "Нет данных для диаграммы");
+    return;
+  }
+  const { ctx, width, height } = fitStatsCanvas(canvas, 280);
+  const pad = { top: 28, right: 12, bottom: 52, left: 36 };
+  const chartW = width - pad.left - pad.right;
+  const chartH = height - pad.top - pad.bottom;
+  const maxVal = Math.max(20, ...groups.map((item) => item.avg));
+  const step = maxVal <= 40 ? 10 : maxVal <= 80 ? 20 : 25;
+  ctx.strokeStyle = "#e4e7ec";
+  ctx.fillStyle = "#9ca3af";
+  ctx.font = "500 11px Inter, system-ui, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let tick = 0; tick <= maxVal; tick += step) {
+    const y = pad.top + chartH - (tick / maxVal) * chartH;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + chartW, y);
+    ctx.stroke();
+    ctx.fillText(String(tick), pad.left - 6, y);
+  }
+  const gap = Math.min(16, chartW / groups.length * 0.25);
+  const barW = Math.max(10, (chartW - gap * (groups.length + 1)) / groups.length);
+  groups.forEach((item, index) => {
+    const x = pad.left + gap + index * (barW + gap);
+    const barH = (item.avg / maxVal) * chartH;
+    const y = pad.top + chartH - barH;
+    ctx.fillStyle = STAT_CHART_COLORS[index % STAT_CHART_COLORS.length];
+    const radius = Math.min(8, barW / 2);
+    ctx.beginPath();
+    ctx.moveTo(x, y + barH);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.lineTo(x + barW - radius, y);
+    ctx.quadraticCurveTo(x + barW, y, x + barW, y + radius);
+    ctx.lineTo(x + barW, y + barH);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "#1d212f";
+    ctx.font = "600 11px Inter, system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(item.avg.toFixed(1), x + barW / 2, y - 4);
+    ctx.save();
+    ctx.translate(x + barW / 2, pad.top + chartH + 8);
+    ctx.rotate(-0.55);
+    ctx.fillStyle = "#6b7280";
+    ctx.font = "500 11px Inter, system-ui, sans-serif";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.fillText(shortStatLabel(item.label), 0, 0);
+    ctx.restore();
+  });
+}
+
+function drawStatsPieChart(canvas, slices) {
+  const legend = document.getElementById("stats-pie-legend");
+  if (!canvas) return;
+  if (!slices.length) {
+    drawStatsEmpty(canvas, 240, "Нет данных для диаграммы");
+    if (legend) legend.innerHTML = "";
+    return;
+  }
+  const { ctx, width, height } = fitStatsCanvas(canvas, 240);
+  const total = slices.reduce((sum, item) => sum + item.value, 0) || 1;
+  const cx = width / 2;
+  const cy = height / 2;
+  const radius = Math.min(width, height) / 2 - 8;
+  let angle = -Math.PI / 2;
+  slices.forEach((item, index) => {
+    const slice = (item.value / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, radius, angle, angle + slice);
+    ctx.closePath();
+    ctx.fillStyle = STAT_CHART_COLORS[index % STAT_CHART_COLORS.length];
+    ctx.fill();
+    angle += slice;
+  });
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius * 0.52, 0, Math.PI * 2);
+  ctx.fillStyle = "#ffffff";
+  ctx.fill();
+  ctx.fillStyle = "#1d212f";
+  ctx.font = "700 18px Inter, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(String(total), cx, cy - 8);
+  ctx.fillStyle = "#6b7280";
+  ctx.font = "600 11px Inter, system-ui, sans-serif";
+  ctx.fillText("учеников", cx, cy + 12);
+  if (legend) {
+    legend.innerHTML = slices
+      .map((item, index) => {
+        const pct = Math.round((item.value / total) * 100);
+        return `<li><span class="stats-legend-dot" style="background:${STAT_CHART_COLORS[index % STAT_CHART_COLORS.length]}"></span>${escapeHtml(item.label)} · ${item.value} (${pct}%)</li>`;
+      })
+      .join("");
+  }
+}
+
 async function renderStats() {
   const cards = document.getElementById("stats-cards");
   const schoolsBody = document.getElementById("stats-schools-body");
@@ -1105,42 +1356,64 @@ async function renderStats() {
   if (!cards || !schoolsBody || !studentsBody) return;
   populateFilterOptions();
   const threshold = Number(document.getElementById("stats-threshold")?.value || 59);
+  const year = document.getElementById("stats-year")?.value || "all";
+  const schoolId = document.getElementById("stats-school")?.value || "all";
+  const subject = document.getElementById("stats-subject")?.value || "all";
   let rows = collectStatRows();
   let protocolCount = protocolCountForStats();
   if (apiReady) {
     try {
-      const data = await apiGet(
-        `/api/stats?year=${encodeURIComponent(document.getElementById("stats-year")?.value || "all")}&school=${encodeURIComponent(document.getElementById("stats-school")?.value || "all")}&threshold=${threshold}`
-      );
+      const params = new URLSearchParams({ year, school: schoolId, subject, threshold: String(threshold) });
+      const data = await apiGet(`/api/stats?${params.toString()}`);
       rows = data.rows || [];
       protocolCount = data.protocolCount || 0;
+      if (Array.isArray(data.subjects) && data.subjects.length) fillStatsSubjectMenu(data.subjects);
     } catch (error) {
       showToast(error.message || "Не удалось загрузить статистику", "error");
     }
   }
   const avg = rows.length ? rows.reduce((sum, row) => sum + row.score, 0) / rows.length : 0;
-  const passed = rows.filter((row) => Number(row.mark) >= 3 || row.score >= 32).length;
   const high = rows.filter((row) => row.score > threshold);
+  const groups = groupStatAverages(rows);
+  const bySubject = statsGroupKey() === "subject";
+  const schoolName = SCHOOLS.find((item) => item.id === schoolId)?.name || "школа";
+  const barTitle = bySubject
+    ? `Средний балл по предметам · ${schoolName}`
+    : subject === "all"
+      ? "Средний балл по школам"
+      : `Средний балл по школам · ${subject}`;
+  const subtitle = [
+    year === "all" ? "все годы" : year,
+    schoolId === "all" ? "все школы" : schoolName,
+    subject === "all" ? "все предметы" : subject,
+  ].join(" · ");
+  const pageSubtitle = document.getElementById("stats-page-subtitle");
+  if (pageSubtitle) pageSubtitle.textContent = subtitle;
+  const barTitleEl = document.getElementById("stats-bar-title");
+  const tableTitleEl = document.getElementById("stats-table-title");
+  const groupTh = document.getElementById("stats-group-th");
+  if (barTitleEl) barTitleEl.textContent = barTitle;
+  if (tableTitleEl) tableTitleEl.textContent = barTitle;
+  if (groupTh) groupTh.textContent = bySubject ? "Предмет" : "Школа";
   cards.innerHTML = `
     <div class="stat-card"><div class="stat-value">${rows.length}</div><div class="stat-label">Участников</div></div>
     <div class="stat-card"><div class="stat-value">${new Set(rows.map((row) => row.schoolId)).size}</div><div class="stat-label">Школ</div></div>
     <div class="stat-card"><div class="stat-value">${avg ? avg.toFixed(1) : "—"}</div><div class="stat-label">Средний балл</div></div>
     <div class="stat-card"><div class="stat-value">${protocolCount}</div><div class="stat-label">Протоколов</div></div>
   `;
-  const bySchool = SCHOOLS.map((school) => {
-    const schoolRows = rows.filter((row) => row.schoolId === school.id);
-    if (!schoolRows.length) return "";
-    const schoolAvg = schoolRows.reduce((sum, row) => sum + row.score, 0) / schoolRows.length;
-    const schoolPassed = schoolRows.filter((row) => Number(row.mark) >= 3 || row.score >= 32).length;
-    return `<tr data-school="${school.id}">
-      <td>${escapeHtml(school.name)}</td>
-      <td>${schoolRows.length}</td>
-      <td>${schoolAvg.toFixed(1)}</td>
-      <td>${schoolPassed}</td>
-      <td>${schoolRows.length - schoolPassed}</td>
-    </tr>`;
-  }).join("");
-  schoolsBody.innerHTML = bySchool || `<tr><td colspan="5">Нет данных</td></tr>`;
+  schoolsBody.innerHTML = groups.length
+    ? groups
+        .map(
+          (item) => `<tr ${item.schoolId ? `data-school="${item.schoolId}"` : ""}>
+      <td>${escapeHtml(item.label)}</td>
+      <td>${item.count}</td>
+      <td>${item.avg.toFixed(1)}</td>
+      <td>${item.passed}</td>
+      <td>${item.failed}</td>
+    </tr>`
+        )
+        .join("")
+    : `<tr><td colspan="5">Нет данных</td></tr>`;
   studentsBody.innerHTML = high.length
     ? high
         .sort((a, b) => b.score - a.score)
@@ -1148,6 +1421,10 @@ async function renderStats() {
         .map((row) => `<tr><td>${escapeHtml(row.name)}</td><td>${escapeHtml(row.schoolName)}</td><td>${escapeHtml(row.klass)}</td><td>${row.score}</td></tr>`)
         .join("")
     : `<tr><td colspan="4">Нет учеников с баллом выше ${threshold}</td></tr>`;
+  requestAnimationFrame(() => {
+    drawStatsBarChart(document.getElementById("stats-bar-chart"), groups);
+    drawStatsPieChart(document.getElementById("stats-pie-chart"), statsMarkSlices(rows));
+  });
 }
 
 async function renderDocuments() {
@@ -2330,9 +2607,16 @@ document.getElementById("page-next")?.addEventListener("click", () => {
   }
 });
 
-["stats-year", "stats-school", "stats-threshold"].forEach((id) => {
+["stats-year", "stats-school", "stats-subject", "stats-threshold"].forEach((id) => {
   document.getElementById(id)?.addEventListener("change", renderStats);
-  document.getElementById(id)?.addEventListener("input", renderStats);
+});
+document.getElementById("stats-threshold")?.addEventListener("input", renderStats);
+
+let statsResizeTimer = 0;
+window.addEventListener("resize", () => {
+  if (state.view !== "stats") return;
+  clearTimeout(statsResizeTimer);
+  statsResizeTimer = setTimeout(() => renderStats(), 150);
 });
 
 document.getElementById("stats-schools-body")?.addEventListener("click", (event) => {
@@ -2415,6 +2699,7 @@ async function bootstrapFromApi() {
     const data = await apiGet("/api/bootstrap");
     if (data.schools?.length) SCHOOLS.splice(0, SCHOOLS.length, ...data.schools);
     protocolCatalog = data.protocols || [];
+    catalogSubjects = data.subjects || [...new Set(protocolCatalog.map((item) => item.subject).filter(Boolean))];
     apiReady = true;
     if (SCHOOLS.length && !SCHOOLS.some((item) => item.id === state.school)) {
       state.school = SCHOOLS[0].id;

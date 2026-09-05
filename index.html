@@ -72,6 +72,10 @@
               <span>Ученики</span>
             </button>
 
+            <button class="nav-group-header" type="button" data-nav="stats">
+              <span>Статистика</span>
+            </button>
+
             <div class="nav-group is-collapsed" data-group="reports">
               <button class="nav-group-header" type="button" data-toggle-group="reports" data-nav="report">
                 <span>Отчёты</span>
@@ -378,7 +382,7 @@
                 <h1 class="page-title">Статистика</h1>
               </div>
             </div>
-            <p class="page-subtitle">Считается по таблицам школ. Выберите год, школу и порог балла.</p>
+            <p class="page-subtitle" id="stats-page-subtitle">Средний балл по выбранным году, школе и предмету.</p>
             <div class="stats-toolbar">
               <label class="input-group">
                 <span class="input-label">Год</span>
@@ -403,6 +407,17 @@
                   </span>
                 </span>
               </label>
+              <label class="input-group stats-subject-group">
+                <span class="input-label">Предмет</span>
+                <span class="field">
+                  <select id="stats-subject">
+                    <option value="all">Все предметы</option>
+                  </select>
+                  <span class="icon icon-12">
+                    <img src="./assets/icons/chevron-down.svg" width="12" height="12" alt="" />
+                  </span>
+                </span>
+              </label>
               <label class="input-group">
                 <span class="input-label">Балл выше</span>
                 <span class="field">
@@ -411,14 +426,29 @@
               </label>
             </div>
             <div class="stats-grid" id="stats-cards"></div>
+            <div class="stats-charts">
+              <section class="stats-panel">
+                <h2 class="section-title" id="stats-bar-title">Средний балл по школам</h2>
+                <div class="stats-chart-wrap">
+                  <canvas id="stats-bar-chart" aria-label="Столбчатая диаграмма среднего балла"></canvas>
+                </div>
+              </section>
+              <section class="stats-panel">
+                <h2 class="section-title" id="stats-pie-title">Оценки</h2>
+                <div class="stats-chart-wrap stats-chart-wrap-pie">
+                  <canvas id="stats-pie-chart" aria-label="Круговая диаграмма оценок"></canvas>
+                </div>
+                <ul class="stats-legend" id="stats-pie-legend"></ul>
+              </section>
+            </div>
             <div class="stats-panels">
               <section class="stats-panel">
-                <h2 class="section-title">Средний балл по школам</h2>
+                <h2 class="section-title" id="stats-table-title">Средний балл по школам</h2>
                 <div class="table-scroll">
                   <table class="data-table" id="stats-schools-table">
                     <thead>
                       <tr>
-                        <th>Школа</th>
+                        <th id="stats-group-th">Школа</th>
                         <th>Участников</th>
                         <th>Средний балл</th>
                         <th>Сдали</th>
